@@ -1,5 +1,5 @@
-streamlit1.38.0
-pandas2.2.2
-supabase2.7.1
-plotly5.24.0
-openpyxl3.1.5
+streamlit
+pandas
+supabase
+plotly
+openpyxl
