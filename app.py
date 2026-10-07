@@ -10,13 +10,13 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
 
 # --- CONFIGURAÇÃO DE IDIOMA E PÁGINA ---
 try:
-       locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-   except locale.Error:
-       try:
-           locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
-       except locale.Error:
-           # Se falhar no Linux do Streamlit Cloud, apenas ignora e segue em frente
-           pass
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+    except locale.Error:
+        # Se falhar no Linux do Streamlit Cloud, apenas ignora e segue em frente
+        pass
 
 st.set_page_config(page_title="Controle de Comissões", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
 
