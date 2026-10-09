@@ -8,13 +8,16 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
                    buscar_todas_parcelas, formatar_moeda, 
                    fazer_login, fazer_logout, get_usuario_atual)
 
-# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA ---
+# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA (CORRIGIDA PARA LINUX/NUVEM) ---
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 except locale.Error:
-    locale.setlocale(locale.LC_ALL, 'Portuguese_Brazil.1252')
+    try:
+        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+    except locale.Error:
+        pass
 
-st.set_page_config(page_title="Controle de Comissões", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_allow_html=True)
 
@@ -42,20 +45,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ============================================================
-# LÓGICA DE SESSÃO E LOGIN
+# LÓGICA DE SESSÃO E VITRINE DE VENDAS
 # ============================================================
 if "usuario_logado" not in st.session_state:
     st.session_state.usuario_logado = get_usuario_atual()
 
-# ============================================================
-# VITRINE DE VENDAS (Aparece para quem não está logado)
-# ============================================================
+if "mostrar_login" not in st.session_state:
+    st.session_state.mostrar_login = False
+
+# TELA DE VITRINE OU LOGIN (Se não estiver logado)
 if not st.session_state.usuario_logado:
     
-    # Inicializa a variável de controle da tela
-    if "mostrar_login" not in st.session_state:
-        st.session_state.mostrar_login = False
-
     if not st.session_state.mostrar_login:
         # --- PÁGINA DE VENDAS (LANDING PAGE) ---
         st.markdown("""
@@ -88,7 +88,7 @@ if not st.session_state.usuario_logado:
         st.subheader("🚀 Por que escolher a C&Q?")
         b1, b2, b3 = st.columns(3)
         with b1:
-            st.markdown("###  Previsibilidade Total")
+            st.markdown("### 📅 Previsibilidade Total")
             st.write("Saiba exatamente quanto vai receber no mês corrente e nos próximos meses. Chega de surpresas.")
         with b2:
             st.markdown("### 🎯 Metas vs Realizado")
@@ -110,7 +110,7 @@ if not st.session_state.usuario_logado:
         col_btn1, col_btn2 = st.columns([1, 1])
         with col_btn1:
             # Link direto para o WhatsApp
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;"> Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;">📱 Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
         with col_btn2:
             if st.button("🔓 Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
@@ -130,7 +130,7 @@ if not st.session_state.usuario_logado:
             senha = st.text_input("Senha", type="password", placeholder="••••••••")
             col1, col2 = st.columns(2)
             with col1:
-                botao_entrar = st.form_submit_button(" Entrar", type="primary", use_container_width=True)
+                botao_entrar = st.form_submit_button("🔓 Entrar", type="primary", use_container_width=True)
             with col2:
                 botao_cadastro = st.form_submit_button("📝 Criar Conta", use_container_width=True)
 
@@ -141,7 +141,7 @@ if not st.session_state.usuario_logado:
                     st.session_state.usuario_logado = usuario
                     st.rerun()
                 else:
-                    st.error("❌ E-mail ou senha incorretos.")
+                    st.error(" E-mail ou senha incorretos.")
             else:
                 st.warning("⚠️ Preencha todos os campos.")
 
@@ -189,6 +189,7 @@ st.sidebar.title(f"👤 {st.session_state.usuario_logado.email}")
 if st.sidebar.button("🚪 Sair do Sistema", use_container_width=True):
     fazer_logout()
     st.session_state.usuario_logado = None
+    st.session_state.mostrar_login = False # Reseta para a vitrine ao sair
     st.rerun()
 st.sidebar.divider()
 st.sidebar.info("Sistema v1.0 - Multi-tenant ativo!")
@@ -210,7 +211,7 @@ st.divider()
 df_tudo = buscar_todas_parcelas(user_id)
 
 if df_tudo.empty:
-    st.warning("⚠️ Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
+    st.warning("️ Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
     st.subheader("🚀 Acesso Rápido")
     col_ac1, col_ac2, col_ac3 = st.columns(3)
     with col_ac1: st.info("📝 **Lançamentos**\n\nRegistre novas vendas e comissões")
@@ -352,11 +353,8 @@ else:
         
         if not df_proximos.empty:
             df_proximos = df_proximos.sort_values('DataVencDT')
-            
-            # Calcular total
             total_proximos = df_proximos['Valor Parcela'].sum()
             
-            # Mostrar total em destaque ANTES da tabela
             col_total1, col_total2 = st.columns([2, 1])
             with col_total1:
                 st.markdown(f"**Total a Receber (próximos 30 dias):**")
@@ -364,8 +362,6 @@ else:
                 st.metric("", f"R$ {formatar_moeda(total_proximos)}", delta_color="normal")
             
             st.divider()
-            
-            # Mostrar tabela
             df_exibir = df_proximos[['Data Vencimento', 'Categoria', 'Subcategoria', 'Valor Parcela']].copy()
             df_exibir['Data Vencimento'] = pd.to_datetime(df_exibir['Data Vencimento']).dt.strftime('%d/%m/%Y')
             st.dataframe(df_exibir, use_container_width=True, hide_index=True)
