@@ -12,11 +12,7 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 except locale.Error:
-    try:
-        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
-    except locale.Error:
-        # Se falhar no Linux do Streamlit Cloud, apenas ignora e segue em frente
-        pass
+    locale.setlocale(locale.LC_ALL, 'Portuguese_Brazil.1252')
 
 st.set_page_config(page_title="Controle de Comissões", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
 
@@ -51,44 +47,120 @@ st.markdown("""
 if "usuario_logado" not in st.session_state:
     st.session_state.usuario_logado = get_usuario_atual()
 
+# ============================================================
+# VITRINE DE VENDAS (Aparece para quem não está logado)
+# ============================================================
 if not st.session_state.usuario_logado:
-    st.markdown("""
-    <div class="login-container">
-        <h1>💰 Controle de Comissões</h1>
-        <p>Acesse sua conta para gerenciar suas vendas</p>
-    </div>
-    """, unsafe_allow_html=True)
+    
+    # Inicializa a variável de controle da tela
+    if "mostrar_login" not in st.session_state:
+        st.session_state.mostrar_login = False
 
-    with st.form("form_login", clear_on_submit=False):
-        email = st.text_input("E-mail", placeholder="seu@email.com")
-        senha = st.text_input("Senha", type="password", placeholder="••••••••")
-        col1, col2 = st.columns(2)
-        with col1:
-            botao_entrar = st.form_submit_button("🔓 Entrar", type="primary", use_container_width=True)
-        with col2:
-            botao_cadastro = st.form_submit_button("📝 Criar Conta", use_container_width=True)
+    if not st.session_state.mostrar_login:
+        # --- PÁGINA DE VENDAS (LANDING PAGE) ---
+        st.markdown("""
+        <div style="text-align: center; padding: 40px 20px;">
+            <h1 style="color: #1e3a8a; font-size: 42px; margin-bottom: 10px;">C&Q Sistemas Inteligentes</h1>
+            <p style="font-size: 18px; color: #64748b;">Tecnologia que trabalha por você.</p>
+        </div>
+        """, unsafe_allow_html=True)
 
-    if botao_entrar:
-        if email and senha:
-            usuario = fazer_login(email, senha)
-            if usuario:
-                st.session_state.usuario_logado = usuario
+        st.markdown("---")
+
+        # Hero Section
+        st.markdown("""
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
+            <h2 style="font-size: 32px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
+            <p style="font-size: 20px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # Para quem é
+        st.subheader("🎯 Ideal para:")
+        col1, col2, col3 = st.columns(3)
+        with col1: st.info("🏠 **Corretores de Imóveis**")
+        with col2: st.info("🚗 **Vendedores de Veículos**")
+        with col3: st.info("🤝 **Correspondentes e Autônomos**")
+
+        st.markdown("---")
+
+        # Benefícios
+        st.subheader("🚀 Por que escolher a C&Q?")
+        b1, b2, b3 = st.columns(3)
+        with b1:
+            st.markdown("###  Previsibilidade Total")
+            st.write("Saiba exatamente quanto vai receber no mês corrente e nos próximos meses. Chega de surpresas.")
+        with b2:
+            st.markdown("### 🎯 Metas vs Realizado")
+            st.write("Acompanhe seu desempenho em tempo real. Bata suas metas com precisão cirúrgica.")
+        with b3:
+            st.markdown("### 🔒 100% Seguro e Privado")
+            st.write("Seus dados de vendas e comissões são isolados e protegidos. Ninguém mais tem acesso.")
+
+        st.markdown("---")
+
+        # Contato e CTA
+        st.markdown("""
+        <div style="text-align: center; padding: 20px;">
+            <h3 style="color: #1e3a8a;">Quer levar o controle total das suas vendas?</h3>
+            <p>Fale diretamente com <strong>Cesar</strong> e agende uma demonstração.</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        col_btn1, col_btn2 = st.columns([1, 1])
+        with col_btn1:
+            # Link direto para o WhatsApp
+            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;"> Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+        with col_btn2:
+            if st.button("🔓 Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
+                st.session_state.mostrar_login = True
                 st.rerun()
-            else:
-                st.error("❌ E-mail ou senha incorretos.")
-        else:
-            st.warning("⚠️ Preencha todos os campos.")
 
-    if botao_cadastro:
-        if email and senha:
-            try:
-                supabase.auth.sign_up({"email": email, "password": senha})
-                st.success("✅ Conta criada com sucesso! Agora faça o login.")
-            except Exception as e:
-                st.error(f"Erro ao criar conta: {str(e)}")
-        else:
-            st.warning("⚠️ Preencha e-mail e senha.")
-    st.stop()
+    else:
+        # --- TELA DE LOGIN (Aparece quando clica no botão) ---
+        st.markdown("""
+        <div class="login-container">
+            <h1>💰 Controle de Comissões</h1>
+            <p>Acesse sua conta para gerenciar suas vendas</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+        with st.form("form_login", clear_on_submit=False):
+            email = st.text_input("E-mail", placeholder="seu@email.com")
+            senha = st.text_input("Senha", type="password", placeholder="••••••••")
+            col1, col2 = st.columns(2)
+            with col1:
+                botao_entrar = st.form_submit_button(" Entrar", type="primary", use_container_width=True)
+            with col2:
+                botao_cadastro = st.form_submit_button("📝 Criar Conta", use_container_width=True)
+
+        if botao_entrar:
+            if email and senha:
+                usuario = fazer_login(email, senha)
+                if usuario:
+                    st.session_state.usuario_logado = usuario
+                    st.rerun()
+                else:
+                    st.error("❌ E-mail ou senha incorretos.")
+            else:
+                st.warning("⚠️ Preencha todos os campos.")
+
+        if botao_cadastro:
+            if email and senha:
+                try:
+                    supabase.auth.sign_up({"email": email, "password": senha})
+                    st.success("✅ Conta criada com sucesso! Agora faça o login.")
+                except Exception as e:
+                    st.error(f"Erro ao criar conta: {str(e)}")
+            else:
+                st.warning("⚠️ Preencha e-mail e senha.")
+        
+        # Botão para voltar para a vitrine
+        if st.button("⬅️ Voltar para a página inicial"):
+            st.session_state.mostrar_login = False
+            st.rerun()
+
+    st.stop() # Para a execução aqui e não carrega o resto do app
 
 # ============================================================
 # APLICATIVO PRINCIPAL (Só carrega se estiver logado)
