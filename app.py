@@ -55,19 +55,7 @@ if not st.session_state.usuario_logado:
     if not st.session_state.mostrar_login:
         # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
         
-        # Centralizar o logo
-        col_logo1, col_logo2, col_logo3 = st.columns([1, 3, 1])
-        with col_logo2:
-            try:
-                st.image("logo_cq.png", width=280, use_container_width=False)
-            except Exception:
-                st.markdown("<h1 style='text-align: center; color: #1e3a8a; font-size: 36px;'>C&Q Sistemas Inteligentes</h1>", unsafe_allow_html=True)
-                
-        st.markdown("<p style='text-align: center; font-size: 18px; color: #64748b; margin-top: -10px; margin-bottom: 30px;'>Tecnologia que trabalha por você.</p>", unsafe_allow_html=True)
-
-        st.markdown("---")
-
-                # Hero Section com Logo Integrado
+        # Hero Section com Logo Integrado
         st.markdown("""
         <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 30px 40px; border-radius: 15px; margin-bottom: 30px; display: flex; align-items: center; gap: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
             <img src="logo_cq.png" style="width: 120px; height: auto; flex-shrink: 0; background: white; border-radius: 10px; padding: 8px;">
