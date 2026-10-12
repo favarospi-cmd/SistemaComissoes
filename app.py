@@ -67,11 +67,14 @@ if not st.session_state.usuario_logado:
 
         st.markdown("---")
 
-        # Hero Section
+                # Hero Section com Logo Integrado
         st.markdown("""
-        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
-            <h2 style="font-size: 28px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
-            <p style="font-size: 18px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 30px 40px; border-radius: 15px; margin-bottom: 30px; display: flex; align-items: center; gap: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <img src="logo_cq.png" style="width: 120px; height: auto; flex-shrink: 0; background: white; border-radius: 10px; padding: 8px;">
+            <div style="flex-grow: 1;">
+                <h2 style="font-size: 28px; margin: 0 0 10px 0; font-weight: bold;">💰 Sistema de Controle de Comissões</h2>
+                <p style="font-size: 17px; line-height: 1.5; margin: 0; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 18px;">Este é o sistema feito para você.</strong></p>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
