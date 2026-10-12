@@ -8,7 +8,7 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
                    buscar_todas_parcelas, formatar_moeda, 
                    fazer_login, fazer_logout, get_usuario_atual)
 
-# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA (CORRIGIDA PARA LINUX/NUVEM) ---
+# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA (CORRIGIDA PARA LINUX) ---
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 except locale.Error:
@@ -17,30 +17,10 @@ except locale.Error:
     except locale.Error:
         pass
 
-    if not st.session_state.mostrar_login:
-        # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
-        
-        # Centralizar o logo
-        col_logo1, col_logo2, col_logo3 = st.columns([1, 3, 1])
-        with col_logo2:
-            try:
-                # Tenta carregar a imagem. Se não achar, mostra o texto como backup.
-                st.image("logo_cq.png", width=280, use_container_width=False)
-            except Exception:
-                st.markdown("<h1 style='text-align: center; color: #1e3a8a; font-size: 36px;'>C&Q Sistemas Inteligentes</h1>", unsafe_allow_html=True)
-                
-        st.markdown("<p style='text-align: center; font-size: 18px; color: #64748b; margin-top: -10px; margin-bottom: 30px;'>Tecnologia que trabalha por você.</p>", unsafe_allow_html=True)
+st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
 
-        st.markdown("---")
+st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_allow_html=True)
 
-        # Hero Section
-        st.markdown("""
-        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
-            <h2 style="font-size: 28px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
-            <p style="font-size: 18px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
-        </div>
-        """, unsafe_allow_html=True)
-      
 # CSS Global
 st.markdown("""
 <style>
@@ -52,10 +32,6 @@ st.markdown("""
     }
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-    .card-resumo {
-        background: white; border-radius: 8px; padding: 15px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05); border-left: 4px solid #3b82f6;
-    }
     .login-container {
         max-width: 400px; margin: 80px auto; padding: 40px;
         background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
@@ -77,21 +53,25 @@ if "mostrar_login" not in st.session_state:
 if not st.session_state.usuario_logado:
     
     if not st.session_state.mostrar_login:
-        # --- PÁGINA DE VENDAS (LANDING PAGE) ---
-        st.markdown("""
-        <div style="text-align: center; padding: 40px 20px;">
-            <h1 style="color: #1e3a8a; font-size: 42px; margin-bottom: 10px;">C&Q Sistemas Inteligentes</h1>
-            <p style="font-size: 18px; color: #64748b;">Tecnologia que trabalha por você.</p>
-        </div>
-        """, unsafe_allow_html=True)
+        # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
+        
+        # Centralizar o logo
+        col_logo1, col_logo2, col_logo3 = st.columns([1, 3, 1])
+        with col_logo2:
+            try:
+                st.image("logo_cq.png", width=280, use_container_width=False)
+            except Exception:
+                st.markdown("<h1 style='text-align: center; color: #1e3a8a; font-size: 36px;'>C&Q Sistemas Inteligentes</h1>", unsafe_allow_html=True)
+                
+        st.markdown("<p style='text-align: center; font-size: 18px; color: #64748b; margin-top: -10px; margin-bottom: 30px;'>Tecnologia que trabalha por você.</p>", unsafe_allow_html=True)
 
         st.markdown("---")
 
         # Hero Section
         st.markdown("""
         <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
-            <h2 style="font-size: 32px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
-            <p style="font-size: 20px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
+            <h2 style="font-size: 28px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
+            <p style="font-size: 18px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
         </div>
         """, unsafe_allow_html=True)
 
@@ -129,15 +109,14 @@ if not st.session_state.usuario_logado:
 
         col_btn1, col_btn2 = st.columns([1, 1])
         with col_btn1:
-            # Link direto para o WhatsApp
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;">📱 Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;"> Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
         with col_btn2:
             if st.button("🔓 Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
     else:
-        # --- TELA DE LOGIN (Aparece quando clica no botão) ---
+        # --- TELA DE LOGIN ---
         st.markdown("""
         <div class="login-container">
             <h1>💰 Controle de Comissões</h1>
@@ -152,7 +131,7 @@ if not st.session_state.usuario_logado:
             with col1:
                 botao_entrar = st.form_submit_button("🔓 Entrar", type="primary", use_container_width=True)
             with col2:
-                botao_cadastro = st.form_submit_button("📝 Criar Conta", use_container_width=True)
+                botao_cadastro = st.form_submit_button(" Criar Conta", use_container_width=True)
 
         if botao_entrar:
             if email and senha:
@@ -161,7 +140,7 @@ if not st.session_state.usuario_logado:
                     st.session_state.usuario_logado = usuario
                     st.rerun()
                 else:
-                    st.error(" E-mail ou senha incorretos.")
+                    st.error("❌ E-mail ou senha incorretos.")
             else:
                 st.warning("⚠️ Preencha todos os campos.")
 
@@ -175,12 +154,11 @@ if not st.session_state.usuario_logado:
             else:
                 st.warning("⚠️ Preencha e-mail e senha.")
         
-        # Botão para voltar para a vitrine
-        if st.button("⬅️ Voltar para a página inicial"):
+        if st.button("️ Voltar para a página inicial"):
             st.session_state.mostrar_login = False
             st.rerun()
 
-    st.stop() # Para a execução aqui e não carrega o resto do app
+    st.stop()
 
 # ============================================================
 # APLICATIVO PRINCIPAL (Só carrega se estiver logado)
@@ -191,7 +169,7 @@ formas_pagamento, subcategorias, regras_parcelas = carregar_regras()
 user_id = st.session_state.usuario_logado.id
 config_empresa = carregar_config_empresa(user_id)
 
-# Banner da Empresa (APENAS UMA VEZ)
+# Banner da Empresa
 info_extra = []
 if config_empresa.get('cnpj'): info_extra.append(f"CNPJ: {config_empresa['cnpj']}")
 if config_empresa.get('telefone'): info_extra.append(f"Tel: {config_empresa['telefone']}")
@@ -209,7 +187,7 @@ st.sidebar.title(f"👤 {st.session_state.usuario_logado.email}")
 if st.sidebar.button("🚪 Sair do Sistema", use_container_width=True):
     fazer_logout()
     st.session_state.usuario_logado = None
-    st.session_state.mostrar_login = False # Reseta para a vitrine ao sair
+    st.session_state.mostrar_login = False
     st.rerun()
 st.sidebar.divider()
 st.sidebar.info("Sistema v1.0 - Multi-tenant ativo!")
@@ -231,14 +209,14 @@ st.divider()
 df_tudo = buscar_todas_parcelas(user_id)
 
 if df_tudo.empty:
-    st.warning("️ Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
+    st.warning("⚠️ Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
     st.subheader("🚀 Acesso Rápido")
     col_ac1, col_ac2, col_ac3 = st.columns(3)
-    with col_ac1: st.info("📝 **Lançamentos**\n\nRegistre novas vendas e comissões")
+    with col_ac1: st.info(" **Lançamentos**\n\nRegistre novas vendas e comissões")
     with col_ac2: st.info("⚙️ **Parâmetros**\n\nConfigure metas, categorias e regras")
     with col_ac3: st.info("📈 **Dashboards**\n\nVisualize gráficos e análises")
 else:
-    st.subheader("📈 Visão Geral Financeira")
+    st.subheader(" Visão Geral Financeira")
     
     total_geral = df_tudo['Valor Parcela'].sum()
     total_pago = df_tudo[df_tudo['Status'] == 'PAGO']['Valor Parcela'].sum()
