@@ -55,15 +55,34 @@ if not st.session_state.usuario_logado:
     if not st.session_state.mostrar_login:
         # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
         
-        # Hero Section com Logo Integrado
-        st.markdown("""
-        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 30px 40px; border-radius: 15px; margin-bottom: 30px; display: flex; align-items: center; gap: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-            <img src="logo_cq.png" style="width: 120px; height: auto; flex-shrink: 0; background: white; border-radius: 10px; padding: 8px;">
-            <div style="flex-grow: 1;">
-                <h2 style="font-size: 28px; margin: 0 0 10px 0; font-weight: bold;">💰 Sistema de Controle de Comissões</h2>
-                <p style="font-size: 17px; line-height: 1.5; margin: 0; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 18px;">Este é o sistema feito para você.</strong></p>
+        # Hero Section com Logo Integrado (CORRIGIDO)
+        col_hero_logo, col_hero_text = st.columns([1, 4])
+        
+        with col_hero_logo:
+            try:
+                st.image("logo_cq.png", width=100, use_container_width=False)
+            except Exception:
+                st.markdown("<div style='width: 100px; height: 100px; background: white; border-radius: 10px;'></div>", unsafe_allow_html=True)
+        
+        with col_hero_text:
+            st.markdown("""
+            <div style="color: white; padding: 20px 0;">
+                <h2 style="font-size: 28px; margin: 0 0 10px 0; font-weight: bold; color: white;"> Sistema de Controle de Comissões</h2>
+                <p style="font-size: 17px; line-height: 1.5; margin: 0; color: white; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 18px;">Este é o sistema feito para você.</strong></p>
             </div>
-        </div>
+            """, unsafe_allow_html=True)
+        
+        # Adicionar a tarja azul como fundo das colunas
+        st.markdown("""
+        <style>
+            [data-testid="stVerticalBlock"] > div:has(> div:nth-child(35)) {
+                background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
+                padding: 30px 40px;
+                border-radius: 15px;
+                margin-bottom: 30px;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            }
+        </style>
         """, unsafe_allow_html=True)
 
         # Para quem é
