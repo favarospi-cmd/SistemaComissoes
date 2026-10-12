@@ -55,26 +55,26 @@ if not st.session_state.usuario_logado:
     if not st.session_state.mostrar_login:
         # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
         
-        # Container principal com fundo azul
+        # Logo centralizada no topo
+        st.markdown("<div style='text-align: center; margin-bottom: 10px;'>", unsafe_allow_html=True)
+        try:
+            st.image("logo_cq.png", width=180, use_container_width=False)
+        except Exception:
+            pass
+        st.markdown("</div>", unsafe_allow_html=True)
+        
+        # Texto "SISTEMAS INTELIGENTES" abaixo da logo
         st.markdown("""
-        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); padding: 40px; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
-            <div style="display: flex; align-items: center; gap: 30px;">
-                <div style="flex-shrink: 0;">
+        <div style="text-align: center; margin-bottom: 30px;">
+            <h3 style="color: #1e3a8a; font-size: 22px; font-weight: bold; margin: 0; letter-spacing: 3px;">SISTEMAS INTELIGENTES</h3>
+        </div>
         """, unsafe_allow_html=True)
         
-        # Logo (usando st.image dentro do container HTML)
-        try:
-            st.image("logo_cq.png", width=100, use_container_width=False)
-        except Exception:
-            st.markdown("<div style='width: 100px; height: 100px; background: white; border-radius: 10px;'></div>", unsafe_allow_html=True)
-        
+        # Tarja azul com título e descrição
         st.markdown("""
-                </div>
-                <div style="flex-grow: 1; color: white;">
-                    <h2 style="font-size: 28px; margin: 0 0 10px 0; font-weight: bold; color: white;"> Sistema de Controle de Comissões</h2>
-                    <p style="font-size: 17px; line-height: 1.5; margin: 0; color: white; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 18px;">Este é o sistema feito para você.</strong></p>
-                </div>
-            </div>
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; margin-bottom: 30px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+            <h2 style="font-size: 32px; margin: 0 0 15px 0; font-weight: bold; color: white;">💰 Sistema de Controle de Comissões</h2>
+            <p style="font-size: 18px; line-height: 1.6; margin: 0; color: white; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 19px;">Este é o sistema feito para você.</strong></p>
         </div>
         """, unsafe_allow_html=True)
         
