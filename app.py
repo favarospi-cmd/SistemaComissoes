@@ -17,10 +17,30 @@ except locale.Error:
     except locale.Error:
         pass
 
-st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
+    if not st.session_state.mostrar_login:
+        # --- PÁGINA DE VENDAS (LANDING PAGE) COM LOGO ---
+        
+        # Centralizar o logo
+        col_logo1, col_logo2, col_logo3 = st.columns([1, 3, 1])
+        with col_logo2:
+            try:
+                # Tenta carregar a imagem. Se não achar, mostra o texto como backup.
+                st.image("logo_cq.png", width=280, use_container_width=False)
+            except Exception:
+                st.markdown("<h1 style='text-align: center; color: #1e3a8a; font-size: 36px;'>C&Q Sistemas Inteligentes</h1>", unsafe_allow_html=True)
+                
+        st.markdown("<p style='text-align: center; font-size: 18px; color: #64748b; margin-top: -10px; margin-bottom: 30px;'>Tecnologia que trabalha por você.</p>", unsafe_allow_html=True)
 
-st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_allow_html=True)
+        st.markdown("---")
 
+        # Hero Section
+        st.markdown("""
+        <div style="background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white; padding: 40px; border-radius: 15px; text-align: center; margin-bottom: 30px;">
+            <h2 style="font-size: 28px; margin-bottom: 15px;">💰 Sistema de Controle de Comissões</h2>
+            <p style="font-size: 18px; line-height: 1.5;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
+        </div>
+        """, unsafe_allow_html=True)
+      
 # CSS Global
 st.markdown("""
 <style>
