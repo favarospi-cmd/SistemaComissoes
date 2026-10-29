@@ -8,7 +8,7 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
                    buscar_todas_parcelas, formatar_moeda, 
                    fazer_login, fazer_logout, get_usuario_atual)
 
-# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA (CORRIGIDA PARA LINUX) ---
+# --- CONFIGURAÇÃO DE IDIOMA E PÁGINA ---
 try:
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
 except locale.Error:
@@ -17,8 +17,7 @@ except locale.Error:
     except locale.Error:
         pass
 
-st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="&#x1F4B0", layout="wide", initial_sidebar_state="collapsed")
-
+st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
 st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_allow_html=True)
 
 # CSS Global
@@ -32,8 +31,6 @@ st.markdown("""
     }
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-    
-    /* LOGIN COMPACTO */
     .login-container {
         max-width: 320px !important;
         margin: 20px auto !important;
@@ -43,39 +40,27 @@ st.markdown("""
         box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         text-align: center;
     }
-    .login-container h1 {
-        font-size: 18px !important;
-        margin-bottom: 5px !important;
-    }
-    .login-container p {
-        font-size: 11px !important;
-        margin-bottom: 10px !important;
-    }
-    
-    /* Forçar redução dos inputs e botões do formulário */
-    .stForm {
-        max-width: 320px !important;
-        margin: 0 auto !important;
-    }
-    .stTextInput > div > div > input {
-        font-size: 13px !important;
-        padding: 8px 12px !important;
-        height: 35px !important;
-    }
-    .stButton > button {
-        font-size: 13px !important;
-        padding: 6px 12px !important;
-        height: 35px !important;
-    }
-    .stForm > div[data-testid="stHorizontalBlock"] {
-        gap: 10px !important;
-    }
-</style>""", unsafe_allow_html=True)
+    .login-container h1 { font-size: 18px !important; margin-bottom: 5px !important; }
+    .login-container p { font-size: 11px !important; margin-bottom: 10px !important; }
+    .stForm { max-width: 320px !important; margin: 0 auto !important; }
+    .stTextInput > div > div > input { font-size: 13px !important; padding: 8px 12px !important; height: 35px !important; }
+    .stButton > button { font-size: 13px !important; padding: 6px 12px !important; height: 35px !important; }
+    .stForm > div[data-testid="stHorizontalBlock"] { gap: 10px !important; }
+</style>
+""", unsafe_allow_html=True)
 
 # ============================================================
-# LÓGICA DE SESSÃO E VITRINE DE VENDAS
+# LÓGICA DE SESSÃO
+# ============================================================
+if "usuario_logado" not in st.session_state:
+    st.session_state.usuario_logado = get_usuario_atual()
+
+if "mostrar_login" not in st.session_state:
+    st.session_state.mostrar_login = False
+
 # ============================================================
 # TELA DE VITRINE OU LOGIN (Se não estiver logado)
+# ============================================================
 if not st.session_state.usuario_logado:
     
     if not st.session_state.mostrar_login:
@@ -103,7 +88,7 @@ if not st.session_state.usuario_logado:
                 <img src="logo_cq.png" style="width: 120px; height: auto; display: block;">
             </div>
             <div style="flex-grow: 1; color: white;">
-                <h2 style="font-size: 28px; margin: 0 0 15px 0; font-weight: bold; color: white;">💰 Sistema de Controle de Comissões</h2>
+                <h2 style="font-size: 28px; margin: 0 0 15px 0; font-weight: bold; color: white;">Sistema de Controle de Comissões</h2>
                 <p style="font-size: 16px; line-height: 1.6; margin: 0; color: white; opacity: 0.95;">Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong style="font-size: 17px;">Este é o sistema feito para você.</strong></p>
             </div>
         </div>
@@ -113,7 +98,7 @@ if not st.session_state.usuario_logado:
         st.markdown("""
         <div style="margin-bottom: 40px;">
             <h3 style="color: #1e3a8a; font-size: 22px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 28px;"></span> Ideal para:
+                <span style="font-size: 28px;">&#x1F3AF;</span> Ideal para:
             </h3>
         </div>
         """, unsafe_allow_html=True)
@@ -122,23 +107,21 @@ if not st.session_state.usuario_logado:
         with col1:
             st.markdown("""
             <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; text-align: center; height: 100%;">
-                <div style="font-size: 40px; margin-bottom: 10px;">🏠</div>
+                <div style="font-size: 40px; margin-bottom: 10px;">&#x1F3E0;</div>
                 <p style="color: #1e3a8a; font-weight: 600; margin: 0;">Corretores de Imóveis</p>
             </div>
             """, unsafe_allow_html=True)
-        
         with col2:
             st.markdown("""
             <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; text-align: center; height: 100%;">
-                <div style="font-size: 40px; margin-bottom: 10px;">🚗</div>
+                <div style="font-size: 40px; margin-bottom: 10px;">&#x1F697;</div>
                 <p style="color: #1e3a8a; font-weight: 600; margin: 0;">Vendedores de Veículos</p>
             </div>
             """, unsafe_allow_html=True)
-        
         with col3:
             st.markdown("""
             <div style="background: #f0f9ff; padding: 20px; border-radius: 10px; text-align: center; height: 100%;">
-                <div style="font-size: 40px; margin-bottom: 10px;">🤝</div>
+                <div style="font-size: 40px; margin-bottom: 10px;">&#x1F91D;</div>
                 <p style="color: #1e3a8a; font-weight: 600; margin: 0;">Correspondentes e Autônomos</p>
             </div>
             """, unsafe_allow_html=True)
@@ -149,7 +132,7 @@ if not st.session_state.usuario_logado:
         st.markdown("""
         <div style="margin-bottom: 40px;">
             <h3 style="color: #1e3a8a; font-size: 22px; margin-bottom: 25px; display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 28px;">🚀</span> Por que escolher a C&Q?
+                <span style="font-size: 28px;">&#x1F680;</span> Por que escolher a C&Q?
             </h3>
         </div>
         """, unsafe_allow_html=True)
@@ -158,25 +141,23 @@ if not st.session_state.usuario_logado:
         with b1:
             st.markdown("""
             <div style="padding: 25px; border-radius: 10px; height: 100%;">
-                <div style="font-size: 35px; margin-bottom: 15px;">📅</div>
+                <div style="font-size: 35px; margin-bottom: 15px;">&#x1F4C5;</div>
                 <h4 style="color: #1e3a8a; margin-bottom: 10px; font-size: 18px;">Previsibilidade Total</h4>
                 <p style="color: #64748b; line-height: 1.6; margin: 0; font-size: 14px;">Saiba exatamente quanto vai receber no mês corrente e nos próximos meses. Chega de surpresas.</p>
             </div>
             """, unsafe_allow_html=True)
-        
         with b2:
             st.markdown("""
             <div style="padding: 25px; border-radius: 10px; height: 100%;">
-                <div style="font-size: 35px; margin-bottom: 15px;">🎯</div>
+                <div style="font-size: 35px; margin-bottom: 15px;">&#x1F3AF;</div>
                 <h4 style="color: #1e3a8a; margin-bottom: 10px; font-size: 18px;">Metas vs Realizado</h4>
                 <p style="color: #64748b; line-height: 1.6; margin: 0; font-size: 14px;">Acompanhe seu desempenho em tempo real. Bata suas metas com precisão cirúrgica.</p>
             </div>
             """, unsafe_allow_html=True)
-        
         with b3:
             st.markdown("""
             <div style="padding: 25px; border-radius: 10px; height: 100%;">
-                <div style="font-size: 35px; margin-bottom: 15px;">🔒</div>
+                <div style="font-size: 35px; margin-bottom: 15px;">&#x1F512;</div>
                 <h4 style="color: #1e3a8a; margin-bottom: 10px; font-size: 18px;">100% Seguro e Privado</h4>
                 <p style="color: #64748b; line-height: 1.6; margin: 0; font-size: 14px;">Seus dados de vendas e comissões são isolados e protegidos. Ninguém mais tem acesso.</p>
             </div>
@@ -194,9 +175,9 @@ if not st.session_state.usuario_logado:
         
         col_btn1, col_btn2 = st.columns([1, 1])
         with col_btn1:
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3);"> Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3);">Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
         with col_btn2:
-            if st.button(" Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
+            if st.button("Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
@@ -204,7 +185,7 @@ if not st.session_state.usuario_logado:
         # --- TELA DE LOGIN ---
         st.markdown("""
         <div class="login-container">
-            <h1>💰 Controle de Comissões</h1>
+            <h1>Controle de Comissões</h1>
             <p>Acesse sua conta para gerenciar suas vendas</p>
         </div>
         """, unsafe_allow_html=True)
@@ -214,9 +195,9 @@ if not st.session_state.usuario_logado:
             senha = st.text_input("Senha", type="password", placeholder="••••••••")
             col1, col2 = st.columns(2)
             with col1:
-                botao_entrar = st.form_submit_button("🔓 Entrar", type="primary", use_container_width=True)
+                botao_entrar = st.form_submit_button("Entrar", type="primary", use_container_width=True)
             with col2:
-                botao_cadastro = st.form_submit_button(" Criar Conta", use_container_width=True)
+                botao_cadastro = st.form_submit_button("Criar Conta", use_container_width=True)
 
         if botao_entrar:
             if email and senha:
@@ -225,113 +206,29 @@ if not st.session_state.usuario_logado:
                     st.session_state.usuario_logado = usuario
                     st.rerun()
                 else:
-                    st.error("❌ E-mail ou senha incorretos.")
+                    st.error("E-mail ou senha incorretos.")
             else:
-                st.warning("⚠️ Preencha todos os campos.")
+                st.warning("Preencha todos os campos.")
 
         if botao_cadastro:
             if email and senha:
                 try:
                     supabase.auth.sign_up({"email": email, "password": senha})
-                    st.success("✅ Conta criada com sucesso! Agora faça o login.")
+                    st.success("Conta criada com sucesso! Agora faça o login.")
                 except Exception as e:
                     st.error(f"Erro ao criar conta: {str(e)}")
             else:
-                st.warning("⚠️ Preencha e-mail e senha.")
+                st.warning("Preencha e-mail e senha.")
         
-        if st.button("️ Voltar para a página inicial"):
+        if st.button("Voltar para a página inicial"):
             st.session_state.mostrar_login = False
             st.rerun()
 
-    st.stop()
-
-        # Para quem é
-        st.subheader("🎯 Ideal para:")
-        col1, col2, col3 = st.columns(3)
-        with col1: st.info("🏠 **Corretores de Imóveis**")
-        with col2: st.info("🚗 **Vendedores de Veículos**")
-        with col3: st.info("🤝 **Correspondentes e Autônomos**")
-
-        st.markdown("---")
-
-        # Benefícios
-        st.subheader("🚀 Por que escolher a C&Q?")
-        b1, b2, b3 = st.columns(3)
-        with b1:
-            st.markdown("### 📅 Previsibilidade Total")
-            st.write("Saiba exatamente quanto vai receber no mês corrente e nos próximos meses. Chega de surpresas.")
-        with b2:
-            st.markdown("### 🎯 Metas vs Realizado")
-            st.write("Acompanhe seu desempenho em tempo real. Bata suas metas com precisão cirúrgica.")
-        with b3:
-            st.markdown("### 🔒 100% Seguro e Privado")
-            st.write("Seus dados de vendas e comissões são isolados e protegidos. Ninguém mais tem acesso.")
-
-        st.markdown("---")
-
-        # Contato e CTA
-        st.markdown("""
-        <div style="text-align: center; padding: 20px;">
-            <h3 style="color: #1e3a8a;">Quer levar o controle total das suas vendas?</h3>
-            <p>Fale diretamente com <strong>Cesar</strong> e agende uma demonstração.</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        col_btn1, col_btn2 = st.columns([1, 1])
-        with col_btn1:
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; width: 100%; cursor: pointer;"> Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
-        with col_btn2:
-            if st.button("🔓 Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
-                st.session_state.mostrar_login = True
-                st.rerun()
-
-    else:
-        # --- TELA DE LOGIN ---
-        st.markdown("""
-        <div class="login-container">
-            <h1>&#x1F4B0; Controle de Comissões</h1>
-            <p>Acesse sua conta para gerenciar suas vendas</p>
-        </div>
-        """, unsafe_allow_html=True)
-
-        with st.form("form_login", clear_on_submit=False):
-            email = st.text_input("E-mail", placeholder="seu@email.com")
-            senha = st.text_input("Senha", type="password", placeholder="••••••••")
-            col1, col2 = st.columns(2)
-            with col1:
-                botao_entrar = st.form_submit_button("🔓 Entrar", type="primary", use_container_width=True)
-            with col2:
-                botao_cadastro = st.form_submit_button(" Criar Conta", use_container_width=True)
-
-        if botao_entrar:
-            if email and senha:
-                usuario = fazer_login(email, senha)
-                if usuario:
-                    st.session_state.usuario_logado = usuario
-                    st.rerun()
-                else:
-                    st.error("❌ E-mail ou senha incorretos.")
-            else:
-                st.warning("⚠️ Preencha todos os campos.")
-
-        if botao_cadastro:
-            if email and senha:
-                try:
-                    supabase.auth.sign_up({"email": email, "password": senha})
-                    st.success("✅ Conta criada com sucesso! Agora faça o login.")
-                except Exception as e:
-                    st.error(f"Erro ao criar conta: {str(e)}")
-            else:
-                st.warning("⚠️ Preencha e-mail e senha.")
-        
-        if st.button("️ Voltar para a página inicial"):
-            st.session_state.mostrar_login = False
-            st.rerun()
-
+    # ESTE STOP É CRUCIAL: Ele impede que o código do dashboard rode para quem não está logado
     st.stop()
 
 # ============================================================
-# APLICATIVO PRINCIPAL (Só carrega se estiver logado)
+# APLICATIVO PRINCIPAL (Só carrega SE estiver logado)
 # ============================================================
 st.set_page_config(initial_sidebar_state="expanded")
 
@@ -353,8 +250,8 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Sidebar com Logout
-st.sidebar.title(f"👤 {st.session_state.usuario_logado.email}")
-if st.sidebar.button("🚪 Sair do Sistema", use_container_width=True):
+st.sidebar.title(f" {st.session_state.usuario_logado.email}")
+if st.sidebar.button("Sair do Sistema", use_container_width=True):
     fazer_logout()
     st.session_state.usuario_logado = None
     st.session_state.mostrar_login = False
@@ -365,7 +262,7 @@ st.sidebar.info("Sistema v1.0 - Multi-tenant ativo!")
 # ============================================================
 # DASHBOARD INICIAL - PAINEL EXECUTIVO
 # ============================================================
-st.title("📊 Painel Executivo")
+st.title("Painel Executivo")
 
 hoje = datetime.now()
 mes_atual = hoje.month
@@ -373,20 +270,20 @@ ano_atual = hoje.year
 meses_pt = ["", "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", 
             "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
 
-st.markdown(f"**📅 Data:** {hoje.strftime('%d/%m/%Y')} | **Período atual:** {meses_pt[mes_atual]}/{ano_atual}")
+st.markdown(f"** Data:** {hoje.strftime('%d/%m/%Y')} | **Período atual:** {meses_pt[mes_atual]}/{ano_atual}")
 st.divider()
 
 df_tudo = buscar_todas_parcelas(user_id)
 
 if df_tudo.empty:
-    st.warning("⚠️ Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
-    st.subheader("🚀 Acesso Rápido")
+    st.warning("Nenhum dado encontrado no sistema. Comece lançando vendas na página **Lançamentos**.")
+    st.subheader("Acesso Rápido")
     col_ac1, col_ac2, col_ac3 = st.columns(3)
     with col_ac1: st.info(" **Lançamentos**\n\nRegistre novas vendas e comissões")
-    with col_ac2: st.info("⚙️ **Parâmetros**\n\nConfigure metas, categorias e regras")
-    with col_ac3: st.info("📈 **Dashboards**\n\nVisualize gráficos e análises")
+    with col_ac2: st.info(" **Parâmetros**\n\nConfigure metas, categorias e regras")
+    with col_ac3: st.info(" **Dashboards**\n\nVisualize gráficos e análises")
 else:
-    st.subheader(" Visão Geral Financeira")
+    st.subheader("Visão Geral Financeira")
     
     total_geral = df_tudo['Valor Parcela'].sum()
     total_pago = df_tudo[df_tudo['Status'] == 'PAGO']['Valor Parcela'].sum()
@@ -405,18 +302,18 @@ else:
         recebido_ano = 0.0
     
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
-    kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
-    kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
+    kpi1.metric("Total Geral", f"R$ {formatar_moeda(total_geral)}")
+    kpi2.metric("Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
     kpi3.metric("Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
-    kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
-    kpi5.metric("📊 Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
+    kpi4.metric("Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
+    kpi5.metric("Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
     
     st.divider()
     
     # --- GRÁFICOS ---
     col_graf1, col_graf2 = st.columns(2)
     with col_graf1:
-        st.subheader("🥧 Distribuição por Status")
+        st.subheader("Distribuição por Status")
         df_status = df_tudo.groupby('Status')['Valor Parcela'].sum().reset_index()
         if not df_status.empty:
             fig_pizza = px.pie(df_status, values='Valor Parcela', names='Status', 
@@ -425,7 +322,7 @@ else:
             st.plotly_chart(fig_pizza, use_container_width=True)
     
     with col_graf2:
-        st.subheader("📊 Faturamento por Categoria")
+        st.subheader("Faturamento por Categoria")
         df_cat = df_tudo.groupby('Categoria')['Valor Parcela'].sum().reset_index()
         if not df_cat.empty:
             fig_barra = px.bar(df_cat, x='Categoria', y='Valor Parcela', color='Categoria', text_auto='.2s')
@@ -435,7 +332,7 @@ else:
     st.divider()
     
     # --- DESEMPENHO VS METAS ---
-    st.subheader("🎯 Desempenho vs Metas")
+    st.subheader("Desempenho vs Metas")
     try:
         metas_raw = supabase.table('metas').select('ano, mes, valor_meta, categorias(nome)').eq('user_id', user_id).execute().data
         if metas_raw:
@@ -472,9 +369,9 @@ else:
                     total_meta_mes = df_mes['meta'].sum()
                     total_percentual_mes = (total_realizado_mes / total_meta_mes * 100) if total_meta_mes > 0 else 0
                     
-                    if total_percentual_mes >= 100: status_geral, cor_geral, icone_geral = "META ATINGIDA", "#2ecc71", "✅"
-                    elif total_percentual_mes >= 70: status_geral, cor_geral, icone_geral = "QUASE LÁ", "#f39c12", "⚠️"
-                    else: status_geral, cor_geral, icone_geral = "ABAIXO DA META", "#e74c3c", "❌"
+                    if total_percentual_mes >= 100: status_geral, cor_geral, icone_geral = "META ATINGIDA", "#2ecc71", "&#x2705;"
+                    elif total_percentual_mes >= 70: status_geral, cor_geral, icone_geral = "QUASE LÁ", "#f39c12", "&#x26A0;&#xFE0F;"
+                    else: status_geral, cor_geral, icone_geral = "ABAIXO DA META", "#e74c3c", "&#x274C;"
                     
                     html_tabela += f'<tr style="background-color: #f8f9fa;"><td rowspan="2" style="padding: 10px; border: 1px solid #ddd; font-weight: bold; vertical-align: top;">{icone_geral} {mes_ano}<br><span style="font-size: 11px; color: {cor_geral};">{status_geral}</span></td>'
                     
@@ -505,14 +402,14 @@ else:
             else:
                 st.info("Nenhum pagamento registrado ou nenhuma meta para este ano.")
         else:
-            st.info("📌 Nenhuma meta cadastrada. Vá em **Parâmetros > Metas de Venda**.")
+            st.info("Nenhuma meta cadastrada. Vá em **Parâmetros > Metas de Venda**.")
     except Exception as e:
-        st.info("📌 Configure suas metas para acompanhar o desempenho.")
+        st.info("Configure suas metas para acompanhar o desempenho.")
     
     st.divider()
     
     # --- PRÓXIMOS RECEBIMENTOS ---
-    st.subheader("📅 Próximos Recebimentos (30 dias)")
+    st.subheader("Próximos Recebimentos (30 dias)")
     df_aberto = df_tudo[df_tudo['Status'] == 'EM ABERTO'].copy()
     if not df_aberto.empty:
         df_aberto['DataVencDT'] = pd.to_datetime(df_aberto['Data Vencimento'])
