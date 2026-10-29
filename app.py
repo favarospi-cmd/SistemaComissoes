@@ -499,7 +499,7 @@ else:
                 st.markdown(html_tabela, unsafe_allow_html=True)
                 
                 st.markdown("""<div style="margin-top: 15px; padding: 10px; background-color: #f8f9fa; border-radius: 5px; font-size: 12px;">
-                    <strong>Legenda:</strong> <span style="color: #2ecc71;">Verde</span> = Meta Atingida (≥100%) | 
+                    <strong>Legenda:</strong> <span style="color: #2ecc71;">■ Verde</span> = Meta Atingida (&ge;100%) | 
                     <span style="color: #f39c12;">Laranja</span> = Quase Lá (70-99%) | <span style="color: #e74c3c;">Vermelho</span> = Abaixo da Meta (<70%)
                 </div>""", unsafe_allow_html=True)
             else:
