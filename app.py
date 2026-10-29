@@ -32,21 +32,45 @@ st.markdown("""
     }
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
+    
+    /* LOGIN COMPACTO */
     .login-container {
-    max-width: 280px; margin: 30px auto; padding: 20px;
-    background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    text-align: center;
-}
-.login-container h1 {
-    font-size: 20px !important;
-    margin-bottom: 5px !important;
-}
-.login-container p {
-    font-size: 12px !important;
-    margin-bottom: 15px !important;
-}
-</style>
-""", unsafe_allow_html=True)
+        max-width: 320px !important;
+        margin: 20px auto !important;
+        padding: 15px !important;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .login-container h1 {
+        font-size: 18px !important;
+        margin-bottom: 5px !important;
+    }
+    .login-container p {
+        font-size: 11px !important;
+        margin-bottom: 10px !important;
+    }
+    
+    /* Forçar redução dos inputs e botões do formulário */
+    .stForm {
+        max-width: 320px !important;
+        margin: 0 auto !important;
+    }
+    .stTextInput > div > div > input {
+        font-size: 13px !important;
+        padding: 8px 12px !important;
+        height: 35px !important;
+    }
+    .stButton > button {
+        font-size: 13px !important;
+        padding: 6px 12px !important;
+        height: 35px !important;
+    }
+    .stForm > div[data-testid="stHorizontalBlock"] {
+        gap: 10px !important;
+    }
+</style>""", unsafe_allow_html=True)
 
 # ============================================================
 # LÓGICA DE SESSÃO E VITRINE DE VENDAS
