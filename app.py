@@ -46,6 +46,14 @@ st.markdown("""
     .stTextInput > div > div > input { font-size: 13px !important; padding: 8px 12px !important; height: 35px !important; }
     .stButton > button { font-size: 13px !important; padding: 6px 12px !important; height: 35px !important; }
     .stForm > div[data-testid="stHorizontalBlock"] { gap: 10px !important; }
+     
+        /* Forçar botões do mesmo tamanho */
+    .stButton > button[key="btn_login_vitrine"] {
+        height: 50px !important;
+        font-size: 16px !important;
+        font-weight: bold !important;
+        padding: 15px 30px !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -167,9 +175,12 @@ if not st.session_state.usuario_logado:
         
         col_btn1, col_btn2 = st.columns([1, 1])
         with col_btn1:
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3);">Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3); height: 50px;">Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
         with col_btn2:
-            if st.button("Já sou cliente? Fazer Login", use_container_width=True, type="primary"):
+            st.markdown(f'<button onclick="document.querySelector(\'[data-testid="stButton"]\').click()" style="background-color: #1e3a8a; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(30, 58, 138, 0.3); height: 50px;" id="btn-login-trigger">Já sou cliente? Fazer Login</button>', unsafe_allow_html=True)
+            
+            # Script para fazer o botão HTML funcionar como o botão Streamlit
+            if st.session_state.get('trigger_login', False):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
