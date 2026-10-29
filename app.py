@@ -33,10 +33,18 @@ st.markdown("""
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
     .login-container {
-        max-width: 400px; margin: 80px auto; padding: 40px;
-        background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        text-align: center;
-    }
+    max-width: 280px; margin: 30px auto; padding: 20px;
+    background: white; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    text-align: center;
+}
+.login-container h1 {
+    font-size: 20px !important;
+    margin-bottom: 5px !important;
+}
+.login-container p {
+    font-size: 12px !important;
+    margin-bottom: 15px !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
