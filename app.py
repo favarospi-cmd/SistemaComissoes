@@ -289,7 +289,7 @@ if not st.session_state.usuario_logado:
         # --- TELA DE LOGIN ---
         st.markdown("""
         <div class="login-container">
-            <h1>💰 Controle de Comissões</h1>
+            <h1>&#x1F4B0; Controle de Comissões</h1>
             <p>Acesse sua conta para gerenciar suas vendas</p>
         </div>
         """, unsafe_allow_html=True)
