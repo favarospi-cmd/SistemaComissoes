@@ -173,16 +173,30 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
+                # Botões de ação
+        st.markdown("<div style='margin-top: 30px;'>", unsafe_allow_html=True)
         col_btn1, col_btn2 = st.columns([1, 1])
+        
         with col_btn1:
-            st.markdown(f'<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><button style="background-color: #25D366; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3); height: 50px;">Chamar no WhatsApp</button></a>', unsafe_allow_html=True)
+            # Botão WhatsApp como link
+            st.markdown("""
+            <a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;">
+                <div style="background-color: #25D366; color: white; padding: 15px 30px; border-radius: 8px; 
+                            font-size: 16px; font-weight: bold; text-align: center; cursor: pointer; 
+                            box-shadow: 0 4px 6px rgba(37, 211, 102, 0.3); height: 20px; line-height: 20px;
+                            display: flex; align-items: center; justify-content: center;">
+                    📱 Chamar no WhatsApp
+                </div>
+            </a>
+            """, unsafe_allow_html=True)
+        
         with col_btn2:
-            st.markdown(f'<button onclick="document.querySelector(\'[data-testid="stButton"]\').click()" style="background-color: #1e3a8a; color: white; padding: 15px 30px; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; width: 100%; cursor: pointer; box-shadow: 0 4px 6px rgba(30, 58, 138, 0.3); height: 50px;" id="btn-login-trigger">Já sou cliente? Fazer Login</button>', unsafe_allow_html=True)
-            
-            # Script para fazer o botão HTML funcionar como o botão Streamlit
-            if st.session_state.get('trigger_login', False):
+            # Botão Login normal do Streamlit
+            if st.button("🔓 Já sou cliente? Fazer Login", use_container_width=True, type="primary", key="btn_login_vitrine"):
                 st.session_state.mostrar_login = True
                 st.rerun()
+        
+        st.markdown("</div>", unsafe_allow_html=True)
 
     else:
         # --- TELA DE LOGIN ---
