@@ -347,7 +347,7 @@ info_texto = " | ".join(info_extra)
 
 st.markdown(f"""
 <div class="banner-empresa">
-    <h1>💰 {config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
+    <h1>&#x1F4B0; {config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
     <p>{config_empresa.get('slogan', '')} {('• ' + info_texto) if info_texto else ''}</p>
 </div>
 """, unsafe_allow_html=True)
