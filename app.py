@@ -17,7 +17,7 @@ except locale.Error:
     except locale.Error:
         pass
 
-st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="💰", layout="wide", initial_sidebar_state="collapsed")
+st.set_page_config(page_title="C&Q Sistemas Inteligentes", page_icon="&#x1F4B0", layout="wide", initial_sidebar_state="collapsed")
 
 st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_allow_html=True)
 
