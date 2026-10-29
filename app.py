@@ -243,7 +243,7 @@ if not st.session_state.usuario_logado:
             st.session_state.mostrar_login = False
             st.rerun()
 
-    st.stop()        """, unsafe_allow_html=True)
+    st.stop()
 
         # Para quem é
         st.subheader("🎯 Ideal para:")
