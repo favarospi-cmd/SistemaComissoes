@@ -66,17 +66,9 @@ if not st.session_state.usuario_logado:
     if not st.session_state.mostrar_login:
         # --- NOVA PÁGINA DE VENDAS (LAYOUT MODERNO) ---
         
-        # Logo pequena no canto superior esquerdo
-        col_logo_top1, col_logo_top2 = st.columns([1, 10])
-        with col_logo_top1:
-            try:
-                st.image("logo_cq.png", width=80, use_container_width=False)
-            except Exception:
-                pass
-        
-        # Texto "SISTEMAS INTELIGENTES" centralizado no topo
+        # Texto "SISTEMAS INTELIGENTES" centralizado no topo (SEM LOGO EM CIMA)
         st.markdown("""
-        <div style="text-align: center; margin: -70px 0 30px 0;">
+        <div style="text-align: center; margin: 20px 0 30px 0;">
             <h3 style="color: #1e3a8a; font-size: 18px; font-weight: bold; margin: 0; letter-spacing: 4px;">SISTEMAS INTELIGENTES</h3>
         </div>
         """, unsafe_allow_html=True)
