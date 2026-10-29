@@ -77,7 +77,7 @@ if not st.session_state.usuario_logado:
         # Texto "SISTEMAS INTELIGENTES" centralizado no topo (SEM LOGO EM CIMA)
         st.markdown("""
         <div style="text-align: center; margin: 20px 0 30px 0;">
-            <h3 style="color: #1e3a8a; font-size: 18px; font-weight: bold; margin: 0; letter-spacing: 4px;">SISTEMAS INTELIGENTES</h3>
+            <h1 style="color: #1e3a8a; font-size: 18px; font-weight: bold; margin: 0; letter-spacing: 4px;">CONROLE DE COMISSÕES - SISTEMAS INTELIGENTES</h1>
         </div>
         """, unsafe_allow_html=True)
         
@@ -173,7 +173,7 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-                # Botões de ação
+        # Botões de ação
         st.markdown("<div style='margin-top: 30px;'>", unsafe_allow_html=True)
         col_btn1, col_btn2 = st.columns([1, 1])
         
