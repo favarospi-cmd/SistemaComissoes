@@ -72,19 +72,35 @@ st.markdown("""
     .cta-box h3 { color: #1e3a8a; font-size: 26px; margin: 0 0 10px 0; font-weight: 700; }
     .cta-box p { color: #64748b; font-size: 16px; margin: 0 0 25px 0; }
     
-    /* BOTÕES IDÊNTICOS */
-    .btn-acao {
+    /* BOTÃO WHATSAPP (HTML) */
+    .btn-whatsapp {
         display: block; width: 100%; padding: 18px 30px; border-radius: 12px; 
         font-size: 16px; font-weight: 700; text-align: center; cursor: pointer; 
         border: none; box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
-        text-decoration: none;
+        text-decoration: none; background-color: #25D366; color: white;
     }
-    .btn-acao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-    .btn-whatsapp { background-color: #25D366; color: white; }
-    .btn-login { background-color: #1e3a8a; color: white; }
+    .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
     
-    /* Esconder elementos do form hidden */
-    div[data-testid="stForm"] { display: none !important; }
+    /* BOTÃO LOGIN (Streamlit nativo estilizado) */
+    div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"] {
+        background-color: #1e3a8a !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        padding: 18px 30px !important;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 58px !important;
+        transition: all 0.2s !important;
+    }
+    div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"]:hover {
+        background-color: #1e40af !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+        transform: translateY(-2px) !important;
+    }
     
     .banner-empresa {
         background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white;
@@ -139,7 +155,7 @@ if not st.session_state.usuario_logado:
         """, unsafe_allow_html=True)
         
         # --- IDEAL PARA ---
-        st.markdown('<h3 class="section-title">🎯 Ideal para:</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="section-title"> Ideal para:</h3>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3, gap="large")
         with col1:
             st.markdown('<div class="card-ideal"><div class="icon">🏠</div><p>Corretores de Imóveis</p></div>', unsafe_allow_html=True)
@@ -149,14 +165,14 @@ if not st.session_state.usuario_logado:
             st.markdown('<div class="card-ideal"><div class="icon">🤝</div><p>Correspondentes e Autônomos</p></div>', unsafe_allow_html=True)
         
         # --- POR QUE ESCOLHER ---
-        st.markdown('<h3 class="section-title">🚀 Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="section-title"> Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
         b1, b2, b3 = st.columns(3, gap="large")
         with b1:
-            st.markdown('<div class="card-benefit"><div class="icon"></div><h4>Previsibilidade Total</h4><p>Saiba exatamente quanto vai receber no mês corrente e nos próximos meses.</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">📅</div><h4>Previsibilidade Total</h4><p>Saiba exatamente quanto vai receber no mês corrente e nos próximos meses.</p></div>', unsafe_allow_html=True)
         with b2:
-            st.markdown('<div class="card-benefit"><div class="icon"></div><h4>Metas vs Realizado</h4><p>Acompanhe seu desempenho em tempo real. Bata suas metas com precisão.</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">🎯</div><h4>Metas vs Realizado</h4><p>Acompanhe seu desempenho em tempo real. Bata suas metas com precisão.</p></div>', unsafe_allow_html=True)
         with b3:
-            st.markdown('<div class="card-benefit"><div class="icon"></div><h4>100% Seguro e Privado</h4><p>Seus dados de vendas e comissões são isolados e protegidos.</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">🔒</div><h4>100% Seguro e Privado</h4><p>Seus dados de vendas e comissões são isolados e protegidos.</p></div>', unsafe_allow_html=True)
         
         # --- CTA ---
         st.markdown("""
@@ -166,28 +182,13 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- BOTÕES ---
+        # --- BOTÕES (WhatsApp em HTML, Login em Streamlit nativo) ---
         col_btn1, col_btn2 = st.columns([1, 1], gap="large")
         with col_btn1:
-            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-acao btn-whatsapp"> Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
+            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-whatsapp">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
         with col_btn2:
-            # Botão de login em HTML que usa session state diretamente
-            st.markdown("""
-            <div class="btn-acao btn-login" id="btn-login-html">
-                🔓 Já sou cliente? Fazer Login
-            </div>
-            <script>
-                document.getElementById('btn-login-html').addEventListener('click', function() {
-                    var iframe = document.createElement('iframe');
-                    iframe.src = window.location.href.split('?')[0] + '?login=1';
-                    iframe.style.display = 'none';
-                    document.body.appendChild(iframe);
-                });
-            </script>
-            """, unsafe_allow_html=True)
-            
-            # Detectar parâmetro de login
-            if "forcar_login" in st.query_params:
+            # Botão nativo do Streamlit - 100% funcional
+            if st.button("🔓 Já sou cliente? Fazer Login", key="btn_login_vitrine", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
@@ -268,7 +269,7 @@ st.sidebar.divider()
 st.sidebar.info("Sistema v1.0 - Multi-tenant ativo!")
 
 # Dashboard
-st.title("📊 Painel Executivo")
+st.title(" Painel Executivo")
 
 hoje = datetime.now()
 mes_atual = hoje.month
@@ -282,7 +283,7 @@ st.divider()
 df_tudo = buscar_todas_parcelas(user_id)
 
 if df_tudo.empty:
-    st.warning("️ Nenhum dado encontrado. Comece lançando vendas em **Lançamentos**.")
+    st.warning("⚠️ Nenhum dado encontrado. Comece lançando vendas em **Lançamentos**.")
 else:
     st.subheader("📈 Visão Geral Financeira")
     
@@ -300,9 +301,9 @@ else:
         recebido_ano = 0.0
     
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
-    kpi1.metric(" Total Geral", f"R$ {formatar_moeda(total_geral)}")
+    kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
     kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
-    kpi3.metric("📂 Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
+    kpi3.metric(" Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
     kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
     kpi5.metric("📊 Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
     
@@ -318,7 +319,7 @@ else:
             st.plotly_chart(fig_pizza, use_container_width=True)
     
     with col_graf2:
-        st.subheader(" Faturamento por Categoria")
+        st.subheader("📊 Faturamento por Categoria")
         df_cat = df_tudo.groupby('Categoria')['Valor Parcela'].sum().reset_index()
         if not df_cat.empty:
             fig_barra = px.bar(df_cat, x='Categoria', y='Valor Parcela', color='Categoria', text_auto='.2s')
