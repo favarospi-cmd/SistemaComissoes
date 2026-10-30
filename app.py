@@ -72,14 +72,33 @@ st.markdown("""
     .cta-box h3 { color: #1e3a8a; font-size: 26px; margin: 0 0 10px 0; font-weight: 700; }
     .cta-box p { color: #64748b; font-size: 16px; margin: 0 0 25px 0; }
     
-    .btn-action {
+    .btn-whatsapp-html {
         display: block; width: 100%; padding: 18px 30px; border-radius: 12px; font-size: 16px;
         font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; border: none;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s; background-color: #25D366; color: white;
     }
-    .btn-action:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-    .btn-whatsapp { background-color: #25D366; color: white; }
-    .btn-login { background-color: #1e3a8a; color: white; }
+    .btn-whatsapp-html:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    
+    /* TRUQUE DE CSS: Deixar o botão do Streamlit IDÊNTICO ao do WhatsApp */
+    button[data-testid="baseButton-primary"][aria-label="🔓 Já sou cliente? Fazer Login"] {
+        background-color: #1e3a8a !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        padding: 18px 30px !important;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 54px !important;
+        transition: all 0.2s !important;
+    }
+    button[data-testid="baseButton-primary"][aria-label="🔓 Já sou cliente? Fazer Login"]:hover {
+        background-color: #1e40af !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+        transform: translateY(-2px) !important;
+    }
     
     .banner-empresa {
         background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white;
@@ -161,20 +180,15 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- BOTÕES ---
+        # --- BOTÕES (WhatsApp em HTML, Login em Streamlit puro para confiabilidade) ---
         col_btn1, col_btn2 = st.columns([1, 1], gap="large")
         with col_btn1:
-            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-action btn-whatsapp">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
+            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-whatsapp-html">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
         with col_btn2:
-            st.markdown('<a href="?login=1" style="text-decoration: none;"><div class="btn-action btn-login">🔓 Já sou cliente? Fazer Login</div></a>', unsafe_allow_html=True)
-        
-        # Detectar clique no botão de login via URL
-        try:
-            if st.query_params.get("login"):
+            # Botão nativo do Streamlit, estilizado via CSS para ficar IDÊNTICO ao do WhatsApp
+            if st.button("🔓 Já sou cliente? Fazer Login", key="btn_fazer_login", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
-        except:
-            pass
 
     else:
         # --- TELA DE LOGIN ---
