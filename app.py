@@ -195,7 +195,7 @@ if not st.session_state.usuario_logado:
         st.markdown(f"""
         <div class="header-cq">
             <img src="{LOGO_URL}" alt="C&Q">
-            <h2>Sistemas Inteligentes</h2>
+            <h2>Controle de Comissões - Sistemas Inteligentes</h2>
         </div>
         """, unsafe_allow_html=True)
         
