@@ -291,25 +291,13 @@ if not st.session_state.usuario_logado:
             </a>
             """, unsafe_allow_html=True)
         
-        # Detectar clique no botão de login via URL params
-        from urllib.parse import urlparse, parse_qs
-        parsed = urlparse(st.query_params.to_dict() if hasattr(st, 'query_params') else {})
-        # Método alternativo usando st.experimental_get_query_params (compatível)
+        # Detectar clique no botão de login via URL
         try:
-            params = st.query_params
-            if hasattr(params, 'get') and params.get('login'):
+            if st.query_params.get("login"):
                 st.session_state.mostrar_login = True
                 st.rerun()
         except:
             pass
-
-    else:
-        # --- TELA DE LOGIN ---
-        st.markdown("""
-        <div class="login-container">
-            <h1>Controle de Comissões</h1>
-            <p>Acesse sua conta para gerenciar suas vendas</p>
-        </div>
         """, unsafe_allow_html=True)
 
         with st.form("form_login", clear_on_submit=False):
