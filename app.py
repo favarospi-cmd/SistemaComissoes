@@ -71,8 +71,6 @@ if "mostrar_login" not in st.session_state:
 # ============================================================
 if not st.session_state.usuario_logado:
     
-    if not st.session_state.mostrar_login:
-
 # ============================================================
 # APLICATIVO PRINCIPAL (Só carrega SE estiver logado)
 # ============================================================
