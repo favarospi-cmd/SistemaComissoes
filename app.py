@@ -8,7 +8,7 @@ from utils import (supabase, carregar_regras, carregar_config_empresa,
                    buscar_todas_parcelas, formatar_moeda, 
                    fazer_login, fazer_logout, get_usuario_atual)
 
-# --- URL DA LOGO (hospedada no próprio GitHub) ---
+# --- URL DA LOGO ---
 LOGO_URL = "https://raw.githubusercontent.com/favarospi-cmd/SistemaComissoes/main/logo_cq.png"
 
 # --- CONFIGURAÇÃO DE IDIOMA ---
@@ -72,33 +72,16 @@ st.markdown("""
     .cta-box h3 { color: #1e3a8a; font-size: 26px; margin: 0 0 10px 0; font-weight: 700; }
     .cta-box p { color: #64748b; font-size: 16px; margin: 0 0 25px 0; }
     
-    .btn-whatsapp-html {
-        display: block; width: 100%; padding: 18px 30px; border-radius: 12px; font-size: 16px;
-        font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; border: none;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s; background-color: #25D366; color: white;
+    /* BOTÕES IDÊNTICOS - HTML PURO */
+    .btn-acao {
+        display: block; width: 100%; padding: 18px 30px; border-radius: 12px; 
+        font-size: 16px; font-weight: 700; text-align: center; cursor: pointer; 
+        border: none; box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
+        text-decoration: none;
     }
-    .btn-whatsapp-html:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
-    
-    /* TRUQUE DE CSS: Deixar o botão do Streamlit IDÊNTICO ao do WhatsApp */
-    button[data-testid="baseButton-primary"][aria-label="🔓 Já sou cliente? Fazer Login"] {
-        background-color: #1e3a8a !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 12px !important;
-        font-size: 16px !important;
-        font-weight: 700 !important;
-        padding: 18px 30px !important;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: 54px !important;
-        transition: all 0.2s !important;
-    }
-    button[data-testid="baseButton-primary"][aria-label="🔓 Já sou cliente? Fazer Login"]:hover {
-        background-color: #1e40af !important;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
-        transform: translateY(-2px) !important;
-    }
+    .btn-acao:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
+    .btn-whatsapp { background-color: #25D366; color: white; }
+    .btn-login { background-color: #1e3a8a; color: white; }
     
     .banner-empresa {
         background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white;
@@ -156,11 +139,11 @@ if not st.session_state.usuario_logado:
         st.markdown('<h3 class="section-title">🎯 Ideal para:</h3>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3, gap="large")
         with col1:
-            st.markdown('<div class="card-ideal"><div class="icon">🏠</div><p>Corretores de Imóveis</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon"></div><p>Corretores de Imóveis</p></div>', unsafe_allow_html=True)
         with col2:
-            st.markdown('<div class="card-ideal"><div class="icon">🚗</div><p>Vendedores de Veículos</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon"></div><p>Vendedores de Veículos</p></div>', unsafe_allow_html=True)
         with col3:
-            st.markdown('<div class="card-ideal"><div class="icon">🤝</div><p>Correspondentes e Autônomos</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon"></div><p>Correspondentes e Autônomos</p></div>', unsafe_allow_html=True)
         
         # --- POR QUE ESCOLHER ---
         st.markdown('<h3 class="section-title">🚀 Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
@@ -170,7 +153,7 @@ if not st.session_state.usuario_logado:
         with b2:
             st.markdown('<div class="card-benefit"><div class="icon">🎯</div><h4>Metas vs Realizado</h4><p>Acompanhe seu desempenho em tempo real. Bata suas metas com precisão.</p></div>', unsafe_allow_html=True)
         with b3:
-            st.markdown('<div class="card-benefit"><div class="icon">🔒</div><h4>100% Seguro e Privado</h4><p>Seus dados de vendas e comissões são isolados e protegidos.</p></div>', unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon"></div><h4>100% Seguro e Privado</h4><p>Seus dados de vendas e comissões são isolados e protegidos.</p></div>', unsafe_allow_html=True)
         
         # --- CTA ---
         st.markdown("""
@@ -180,13 +163,20 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- BOTÕES (WhatsApp em HTML, Login em Streamlit puro para confiabilidade) ---
+        # --- BOTÕES IDÊNTICOS (AMBOS EM HTML PURO) ---
         col_btn1, col_btn2 = st.columns([1, 1], gap="large")
         with col_btn1:
-            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-whatsapp-html">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
+            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-acao btn-whatsapp">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
         with col_btn2:
-            # Botão nativo do Streamlit, estilizado via CSS para ficar IDÊNTICO ao do WhatsApp
-            if st.button("🔓 Já sou cliente? Fazer Login", key="btn_fazer_login", use_container_width=True, type="primary"):
+            # Botão de login em HTML puro que aciona um form hidden do Streamlit
+            st.markdown("""
+            <div class="btn-acao btn-login" onclick="document.getElementById('btn-login-streamlit').click();">
+                🔓 Já sou cliente? Fazer Login
+            </div>
+            """, unsafe_allow_html=True)
+            
+            # Botão invisível do Streamlit que será acionado pelo clique no HTML
+            if st.button("", key="btn-login-streamlit", type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
@@ -233,7 +223,7 @@ if not st.session_state.usuario_logado:
             st.session_state.mostrar_login = False
             st.rerun()
 
-    # ESTE STOP É CRUCIAL: Impede que o dashboard carregue para quem não está logado
+    # ESTE STOP É CRUCIAL
     st.stop()
 
 # ============================================================
@@ -301,7 +291,7 @@ else:
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
     kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
     kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
-    kpi3.metric("📂 Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
+    kpi3.metric(" Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
     kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
     kpi5.metric("📊 Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
     
