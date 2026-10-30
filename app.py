@@ -28,148 +28,69 @@ st.markdown('<script>document.documentElement.lang = "pt-BR";</script>', unsafe_
 # ============================================================
 st.markdown("""
 <style>
-    /* Base */
     body { background-color: #f8fafc !important; }
     section[data-testid="stSidebar"] { width: 280px !important; }
     
-    /* Header */
     .header-cq {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 20px;
-        padding: 30px 20px 20px 20px;
+        display: flex; align-items: center; justify-content: center; gap: 20px; padding: 30px 20px 20px 20px;
     }
     .header-cq img { width: 50px; height: auto; }
-    .header-cq h2 {
-        color: #1e3a8a;
-        font-size: 28px;
-        font-weight: 800;
-        letter-spacing: 6px;
-        margin: 0;
-        text-transform: uppercase;
-    }
+    .header-cq h2 { color: #1e3a8a; font-size: 28px; font-weight: 800; letter-spacing: 6px; margin: 0; text-transform: uppercase; }
     
-    /* Tarja Azul Hero */
     .hero-banner {
-        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-        border-radius: 20px;
-        padding: 50px 40px;
-        margin: 20px 0 40px 0;
-        display: flex;
-        align-items: center;
-        gap: 40px;
-        box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); border-radius: 20px; padding: 50px 40px;
+        margin: 20px 0 40px 0; display: flex; align-items: center; gap: 40px; box-shadow: 0 10px 30px rgba(30, 58, 138, 0.3);
     }
-    .hero-logo-box {
-        background: white;
-        border-radius: 15px;
-        padding: 20px;
-        flex-shrink: 0;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    }
+    .hero-logo-box { background: white; border-radius: 15px; padding: 20px; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
     .hero-logo-box img { width: 140px; height: auto; display: block; }
-    .hero-text h1 {
-        color: white;
-        font-size: 32px;
-        font-weight: 700;
-        margin: 0 0 15px 0;
-    }
-    .hero-text p {
-        color: rgba(255,255,255,0.95);
-        font-size: 17px;
-        line-height: 1.6;
-        margin: 0;
-    }
+    .hero-text h1 { color: white; font-size: 32px; font-weight: 700; margin: 0 0 15px 0; }
+    .hero-text p { color: rgba(255,255,255,0.95); font-size: 17px; line-height: 1.6; margin: 0; }
     .hero-text strong { color: white; font-size: 18px; }
     
-    /* Seções */
-    .section-title {
-        color: #1e3a8a;
-        font-size: 24px;
-        font-weight: 700;
-        margin: 40px 0 25px 0;
-        display: flex;
-        align-items: center;
-        gap: 12px;
-    }
+    .section-title { color: #1e3a8a; font-size: 24px; font-weight: 700; margin: 40px 0 25px 0; display: flex; align-items: center; gap: 12px; }
     
-    /* Cards */
     .card-ideal {
-        background: white;
-        border-radius: 12px;
-        padding: 30px 20px;
-        text-align: center;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        border: 1px solid #e2e8f0;
-        transition: transform 0.2s;
-        height: 100%;
+        background: white; border-radius: 12px; padding: 30px 20px; text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; transition: transform 0.2s; height: 100%;
     }
     .card-ideal:hover { transform: translateY(-5px); }
     .card-ideal .icon { font-size: 45px; margin-bottom: 15px; }
     .card-ideal p { color: #1e3a8a; font-weight: 600; margin: 0; font-size: 15px; }
     
     .card-benefit {
-        background: white;
-        border-radius: 12px;
-        padding: 30px 25px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
-        border: 1px solid #e2e8f0;
-        height: 100%;
+        background: white; border-radius: 12px; padding: 30px 25px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06); border: 1px solid #e2e8f0; height: 100%;
     }
     .card-benefit .icon { font-size: 40px; margin-bottom: 15px; }
     .card-benefit h4 { color: #1e3a8a; margin: 0 0 10px 0; font-size: 18px; font-weight: 700; }
     .card-benefit p { color: #64748b; line-height: 1.6; margin: 0; font-size: 14px; }
     
-    /* CTA Box */
     .cta-box {
-        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-        border-radius: 20px;
-        padding: 40px 30px;
-        text-align: center;
-        margin: 50px 0 30px 0;
-        border: 1px solid #bae6fd;
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border-radius: 20px;
+        padding: 40px 30px; text-align: center; margin: 50px 0 30px 0; border: 1px solid #bae6fd;
     }
     .cta-box h3 { color: #1e3a8a; font-size: 26px; margin: 0 0 10px 0; font-weight: 700; }
     .cta-box p { color: #64748b; font-size: 16px; margin: 0 0 25px 0; }
     
-    /* Botões iguais */
     .btn-action {
-        display: block;
-        width: 100%;
-        padding: 18px 30px;
-        border-radius: 12px;
-        font-size: 16px;
-        font-weight: 700;
-        text-align: center;
-        text-decoration: none;
-        cursor: pointer;
-        border: none;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-        transition: all 0.2s;
+        display: block; width: 100%; padding: 18px 30px; border-radius: 12px; font-size: 16px;
+        font-weight: 700; text-align: center; text-decoration: none; cursor: pointer; border: none;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15); transition: all 0.2s;
     }
     .btn-action:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
     .btn-whatsapp { background-color: #25D366; color: white; }
     .btn-login { background-color: #1e3a8a; color: white; }
     
-    /* Banner empresa (interno) */
     .banner-empresa {
-        background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%);
-        color: white; padding: 20px 30px; border-radius: 10px; margin-bottom: 20px;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        background: linear-gradient(90deg, #1e3a8a 0%, #3b82f6 100%); color: white;
+        padding: 20px 30px; border-radius: 10px; margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     }
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
     
-    /* Login compacto */
     .login-container {
-        max-width: 320px !important;
-        margin: 20px auto !important;
-        padding: 15px !important;
-        background: white;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        text-align: center;
+        max-width: 320px !important; margin: 20px auto !important; padding: 15px !important;
+        background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;
     }
     .login-container h1 { font-size: 18px !important; margin-bottom: 5px !important; }
     .login-container p { font-size: 11px !important; margin-bottom: 10px !important; }
@@ -191,7 +112,7 @@ if "mostrar_login" not in st.session_state:
 if not st.session_state.usuario_logado:
     
     if not st.session_state.mostrar_login:
-        # --- HEADER COM LOGO PEQUENA + NOME ---
+        # --- HEADER ---
         st.markdown(f"""
         <div class="header-cq">
             <img src="{LOGO_URL}" alt="C&Q">
@@ -199,14 +120,14 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- TARJA AZUL HERO COM LOGO ---
+        # --- HERO ---
         st.markdown(f"""
         <div class="hero-banner">
             <div class="hero-logo-box">
                 <img src="{LOGO_URL}" alt="C&Q Logo">
             </div>
             <div class="hero-text">
-                <h1>&#x1F4B0;Sistema de Controle de Comissões</h1>
+                <h1>&#x1F4B0; Sistema de Controle de Comissões</h1>
                 <p>Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
             </div>
         </div>
@@ -214,60 +135,25 @@ if not st.session_state.usuario_logado:
         
         # --- IDEAL PARA ---
         st.markdown('<h3 class="section-title">🎯 Ideal para:</h3>', unsafe_allow_html=True)
-        
         col1, col2, col3 = st.columns(3, gap="large")
         with col1:
-            st.markdown("""
-            <div class="card-ideal">
-                <div class="icon">🏠</div>
-                <p>Corretores de Imóveis</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon">🏠</div><p>Corretores de Imóveis</p></div>', unsafe_allow_html=True)
         with col2:
-            st.markdown("""
-            <div class="card-ideal">
-                <div class="icon">🚗</div>
-                <p>Vendedores de Veículos</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon">🚗</div><p>Vendedores de Veículos</p></div>', unsafe_allow_html=True)
         with col3:
-            st.markdown("""
-            <div class="card-ideal">
-                <div class="icon">🤝</div>
-                <p>Correspondentes e Autônomos</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-ideal"><div class="icon">🤝</div><p>Correspondentes e Autônomos</p></div>', unsafe_allow_html=True)
         
         # --- POR QUE ESCOLHER ---
         st.markdown('<h3 class="section-title">🚀 Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
-        
         b1, b2, b3 = st.columns(3, gap="large")
         with b1:
-            st.markdown("""
-            <div class="card-benefit">
-                <div class="icon">📅</div>
-                <h4>Previsibilidade Total</h4>
-                <p>Saiba exatamente quanto vai receber no mês corrente e nos próximos meses. Chega de surpresas.</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">📅</div><h4>Previsibilidade Total</h4><p>Saiba exatamente quanto vai receber no mês corrente e nos próximos meses.</p></div>', unsafe_allow_html=True)
         with b2:
-            st.markdown("""
-            <div class="card-benefit">
-                <div class="icon">🎯</div>
-                <h4>Metas vs Realizado</h4>
-                <p>Acompanhe seu desempenho em tempo real. Bata suas metas com precisão cirúrgica.</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">🎯</div><h4>Metas vs Realizado</h4><p>Acompanhe seu desempenho em tempo real. Bata suas metas com precisão.</p></div>', unsafe_allow_html=True)
         with b3:
-            st.markdown("""
-            <div class="card-benefit">
-                <div class="icon">🔒</div>
-                <h4>100% Seguro e Privado</h4>
-                <p>Seus dados de vendas e comissões são isolados e protegidos. Ninguém mais tem acesso.</p>
-            </div>
-            """, unsafe_allow_html=True)
+            st.markdown('<div class="card-benefit"><div class="icon">🔒</div><h4>100% Seguro e Privado</h4><p>Seus dados de vendas e comissões são isolados e protegidos.</p></div>', unsafe_allow_html=True)
         
-        # --- CTA FINAL ---
+        # --- CTA ---
         st.markdown("""
         <div class="cta-box">
             <h3>Quer levar o controle total das suas vendas?</h3>
@@ -275,21 +161,12 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- BOTÕES IGUAIS (ambos em HTML puro) ---
+        # --- BOTÕES ---
         col_btn1, col_btn2 = st.columns([1, 1], gap="large")
         with col_btn1:
-            st.markdown("""
-            <a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;">
-                <div class="btn-action btn-whatsapp"> Chamar no WhatsApp</div>
-            </a>
-            """, unsafe_allow_html=True)
+            st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-action btn-whatsapp">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
         with col_btn2:
-            # Botão login como link que recarrega a página com parâmetro
-            st.markdown("""
-            <a href="?login=1" style="text-decoration: none;">
-                <div class="btn-action btn-login">🔓 Já sou cliente? Fazer Login</div>
-            </a>
-            """, unsafe_allow_html=True)
+            st.markdown('<a href="?login=1" style="text-decoration: none;"><div class="btn-action btn-login">🔓 Já sou cliente? Fazer Login</div></a>', unsafe_allow_html=True)
         
         # Detectar clique no botão de login via URL
         try:
@@ -298,6 +175,14 @@ if not st.session_state.usuario_logado:
                 st.rerun()
         except:
             pass
+
+    else:
+        # --- TELA DE LOGIN ---
+        st.markdown("""
+        <div class="login-container">
+            <h1>Controle de Comissões</h1>
+            <p>Acesse sua conta para gerenciar suas vendas</p>
+        </div>
         """, unsafe_allow_html=True)
 
         with st.form("form_login", clear_on_submit=False):
@@ -334,6 +219,7 @@ if not st.session_state.usuario_logado:
             st.session_state.mostrar_login = False
             st.rerun()
 
+    # ESTE STOP É CRUCIAL: Impede que o dashboard carregue para quem não está logado
     st.stop()
 
 # ============================================================
@@ -383,7 +269,7 @@ df_tudo = buscar_todas_parcelas(user_id)
 if df_tudo.empty:
     st.warning("⚠️ Nenhum dado encontrado. Comece lançando vendas em **Lançamentos**.")
 else:
-    st.subheader(" Visão Geral Financeira")
+    st.subheader("📈 Visão Geral Financeira")
     
     total_geral = df_tudo['Valor Parcela'].sum()
     total_aberto = df_tudo[df_tudo['Status'] == 'EM ABERTO']['Valor Parcela'].sum()
@@ -399,11 +285,11 @@ else:
         recebido_ano = 0.0
     
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
-    kpi1.metric("&#x1F4B0;Total Geral", f"R$ {formatar_moeda(total_geral)}")
+    kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
     kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
     kpi3.metric("📂 Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
     kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
-    kpi5.metric(" Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
+    kpi5.metric("📊 Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
     
     st.divider()
     
