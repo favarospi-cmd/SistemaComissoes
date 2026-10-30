@@ -206,7 +206,7 @@ if not st.session_state.usuario_logado:
                 <img src="{LOGO_URL}" alt="C&Q Logo">
             </div>
             <div class="hero-text">
-                <h1>💰 Sistema de Controle de Comissões</h1>
+                <h1>&#x1F4B0;Sistema de Controle de Comissões</h1>
                 <p>Trabalha com comissão e quer saber exatamente o que vai cair no seu bolso este mês e nos próximos?<br><strong>Este é o sistema feito para você.</strong></p>
             </div>
         </div>
@@ -352,7 +352,7 @@ info_texto = " | ".join(info_extra)
 
 st.markdown(f"""
 <div class="banner-empresa">
-    <h1>💰 {config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
+    <h1>&#x1F4B0;{config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
     <p>{config_empresa.get('slogan', '')} {('• ' + info_texto) if info_texto else ''}</p>
 </div>
 """, unsafe_allow_html=True)
@@ -399,7 +399,7 @@ else:
         recebido_ano = 0.0
     
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
-    kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
+    kpi1.metric("&#x1F4B0;Total Geral", f"R$ {formatar_moeda(total_geral)}")
     kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
     kpi3.metric("📂 Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
     kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
