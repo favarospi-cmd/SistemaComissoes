@@ -261,7 +261,7 @@ if not st.session_state.usuario_logado:
         with b3:
             st.markdown("""
             <div class="card-benefit">
-                <div class="icon"></div>
+                <div class="icon">🔒</div>
                 <h4>100% Seguro e Privado</h4>
                 <p>Seus dados de vendas e comissões são isolados e protegidos. Ninguém mais tem acesso.</p>
             </div>
@@ -302,11 +302,6 @@ if not st.session_state.usuario_logado:
                 st.rerun()
         except:
             pass
-        
-        # Fallback: botão invisível do Streamlit
-        if st.button("", key="btn_login_invisivel", type="primary"):
-            st.session_state.mostrar_login = True
-            st.rerun()
 
     else:
         # --- TELA DE LOGIN ---
