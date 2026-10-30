@@ -352,9 +352,10 @@ info_texto = " | ".join(info_extra)
 
 st.markdown(f"""
 <div class="banner-empresa">
-    <h1>&#x1F4B0;{config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
-    <p>{config_empresa.get('slogan', '')} {('• ' + info_texto) if info_texto else ''}</p>
+    <h1>&#x1F4B0; {config_empresa.get('nome_empresa', 'Sua Empresa')}</h1>
+    <p>{config_empresa.get('slogan', '')} {'&bull; ' + info_texto if info_texto else ''}</p>
 </div>
+""", unsafe_allow_html=True)
 
 st.sidebar.title(f"👤 {st.session_state.usuario_logado.email}")
 if st.sidebar.button("Sair do Sistema", use_container_width=True):
