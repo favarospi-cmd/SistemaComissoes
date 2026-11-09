@@ -192,52 +192,149 @@ if not st.session_state.usuario_logado:
                 st.session_state.mostrar_login = True
                 st.rerun()
 
-    else:
-        # --- TELA DE LOGIN ---
+        else:
+        # --- TELA DE LOGIN MODERNA ---
+        
+        # Fundo com gradiente suave
         st.markdown("""
-        <div class="login-container">
-            <h1>Controle de Comissões</h1>
-            <p>Acesse sua conta para gerenciar suas vendas</p>
-        </div>
+        <style>
+            .login-page-bg {
+                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+                min-height: 80vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 40px 20px;
+                border-radius: 20px;
+                margin: 20px 0;
+            }
+            .login-card {
+                background: white;
+                border-radius: 20px;
+                padding: 40px 35px;
+                max-width: 380px;
+                width: 100%;
+                box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15);
+                text-align: center;
+            }
+            .login-card img {
+                width: 70px;
+                height: auto;
+                margin-bottom: 15px;
+            }
+            .login-card h1 {
+                color: #1e3a8a;
+                font-size: 22px;
+                font-weight: 700;
+                margin: 0 0 5px 0;
+            }
+            .login-card .subtitle {
+                color: #64748b;
+                font-size: 13px;
+                margin: 0 0 25px 0;
+            }
+            .login-card label {
+                color: #1e3a8a;
+                font-weight: 600;
+                font-size: 13px;
+                text-align: left;
+                display: block;
+                margin-bottom: 5px;
+            }
+            .login-card input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 2px solid #e2e8f0;
+                border-radius: 10px;
+                font-size: 14px;
+                margin-bottom: 15px;
+                transition: all 0.2s;
+                box-sizing: border-box;
+            }
+            .login-card input:focus {
+                border-color: #1e3a8a;
+                outline: none;
+                box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+            }
+            .btn-entrar {
+                width: 100%;
+                padding: 14px;
+                background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+                color: white;
+                border: none;
+                border-radius: 10px;
+                font-size: 15px;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.2s;
+                box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+                margin-top: 5px;
+            }
+            .btn-entrar:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+            }
+            .link-criar {
+                display: block;
+                margin-top: 15px;
+                color: #3b82f6;
+                font-size: 13px;
+                text-decoration: none;
+                font-weight: 600;
+            }
+            .link-criar:hover {
+                text-decoration: underline;
+            }
+            .link-voltar {
+                display: inline-block;
+                margin-top: 20px;
+                color: #64748b;
+                font-size: 12px;
+                text-decoration: none;
+            }
+            .link-voltar:hover {
+                color: #1e3a8a;
+            }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        st.markdown(f"""
+        <div class="login-page-bg">
+            <div class="login-card">
+                <img src="{LOGO_URL}" alt="C&Q">
+                <h1>Bem-vindo de volta</h1>
+                <p class="subtitle">Acesse sua conta para continuar</p>
         """, unsafe_allow_html=True)
 
         with st.form("form_login", clear_on_submit=False):
-            email = st.text_input("E-mail", placeholder="seu@email.com")
-            senha = st.text_input("Senha", type="password", placeholder="••••••••")
-            col1, col2 = st.columns(2)
-            with col1:
-                botao_entrar = st.form_submit_button("Entrar", type="primary", use_container_width=True)
-            with col2:
-                botao_cadastro = st.form_submit_button("Criar Conta", use_container_width=True)
-
+            st.markdown("<label>E-mail</label>", unsafe_allow_html=True)
+            email = st.text_input("", placeholder="seu@email.com", key="login_email")
+            st.markdown("<label>Senha</label>", unsafe_allow_html=True)
+            senha = st.text_input("", type="password", placeholder="••••••••", key="login_senha")
+            
+            botao_entrar = st.form_submit_button("Entrar no Sistema", use_container_width=True, type="primary")
+        
+        st.markdown('<a href="#" class="link-criar">Não tem conta? Fale com Cesar no WhatsApp</a>', unsafe_allow_html=True)
+        
         if botao_entrar:
             if email and senha:
-                usuario = fazer_login(email, senha)
+                with st.spinner("Entrando..."):
+                    usuario = fazer_login(email, senha)
                 if usuario:
                     st.session_state.usuario_logado = usuario
                     st.rerun()
                 else:
-                    st.error("E-mail ou senha incorretos.")
+                    st.error("❌ E-mail ou senha incorretos.")
             else:
-                st.warning("Preencha todos os campos.")
-
-        if botao_cadastro:
-            if email and senha:
-                try:
-                    supabase.auth.sign_up({"email": email, "password": senha})
-                    st.success("Conta criada com sucesso! Agora faça o login.")
-                except Exception as e:
-                    st.error(f"Erro ao criar conta: {str(e)}")
-            else:
-                st.warning("Preencha e-mail e senha.")
+                st.warning("⚠️ Preencha todos os campos.")
         
-        if st.button("Voltar para a página inicial"):
+        if st.button("← Voltar para a página inicial", key="btn_voltar_login"):
             st.session_state.mostrar_login = False
             st.rerun()
 
     # ESTE STOP É CRUCIAL
     st.stop()
-
+    
 # ============================================================
 # APLICATIVO PRINCIPAL (logado)
 # ============================================================
