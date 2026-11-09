@@ -78,14 +78,22 @@ st.markdown("""
     }
     .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
     
-    div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"] {
-        background-color: #1e3a8a !important; color: white !important; border: none !important;
-        border-radius: 12px !important; font-size: 16px !important; font-weight: 700 !important;
-        padding: 18px 30px !important; box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
-        width: 100% !important; height: auto !important; min-height: 58px !important; transition: all 0.2s !important;
+        /* Forçar botão de login azul */
+    .stButton > button {
+        background-color: #1e3a8a !important;
+        color: white !important;
+        border: none !important;
+        border-radius: 12px !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        padding: 18px 30px !important;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
+        width: 100% !important;
+        min-height: 58px !important;
     }
-    div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"]:hover {
-        background-color: #1e40af !important; box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important; transform: translateY(-2px) !important;
+    .stButton > button:hover {
+        background-color: #1e40af !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
     }
     
     .banner-empresa {
