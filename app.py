@@ -31,9 +31,7 @@ st.markdown("""
     body { background-color: #f8fafc !important; }
     section[data-testid="stSidebar"] { width: 280px !important; }
     
-    .header-cq {
-        display: flex; align-items: center; justify-content: center; gap: 20px; padding: 30px 20px 20px 20px;
-    }
+    .header-cq { display: flex; align-items: center; justify-content: center; gap: 20px; padding: 30px 20px 20px 20px; }
     .header-cq img { width: 50px; height: auto; }
     .header-cq h2 { color: #1e3a8a; font-size: 28px; font-weight: 800; letter-spacing: 6px; margin: 0; text-transform: uppercase; }
     
@@ -72,7 +70,6 @@ st.markdown("""
     .cta-box h3 { color: #1e3a8a; font-size: 26px; margin: 0 0 10px 0; font-weight: 700; }
     .cta-box p { color: #64748b; font-size: 16px; margin: 0 0 25px 0; }
     
-    /* BOTÃO WHATSAPP (HTML) */
     .btn-whatsapp {
         display: block; width: 100%; padding: 18px 30px; border-radius: 12px; 
         font-size: 16px; font-weight: 700; text-align: center; cursor: pointer; 
@@ -81,25 +78,14 @@ st.markdown("""
     }
     .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.2); }
     
-    /* BOTÃO LOGIN (Streamlit nativo estilizado) */
     div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"] {
-        background-color: #1e3a8a !important;
-        color: white !important;
-        border: none !important;
-        border-radius: 12px !important;
-        font-size: 16px !important;
-        font-weight: 700 !important;
-        padding: 18px 30px !important;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
-        width: 100% !important;
-        height: auto !important;
-        min-height: 58px !important;
-        transition: all 0.2s !important;
+        background-color: #1e3a8a !important; color: white !important; border: none !important;
+        border-radius: 12px !important; font-size: 16px !important; font-weight: 700 !important;
+        padding: 18px 30px !important; box-shadow: 0 6px 15px rgba(0,0,0,0.15) !important;
+        width: 100% !important; height: auto !important; min-height: 58px !important; transition: all 0.2s !important;
     }
     div[data-testid="stVerticalBlock"] > div[data-testid="stColumn"] > div > div > button[kind="primary"]:hover {
-        background-color: #1e40af !important;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
-        transform: translateY(-2px) !important;
+        background-color: #1e40af !important; box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important; transform: translateY(-2px) !important;
     }
     
     .banner-empresa {
@@ -108,13 +94,26 @@ st.markdown("""
     }
     .banner-empresa h1 { margin: 0; font-size: 26px; font-weight: bold; }
     .banner-empresa p { margin: 5px 0 0 0; font-size: 14px; opacity: 0.9; }
-    
-    .login-container {
-        max-width: 320px !important; margin: 20px auto !important; padding: 15px !important;
-        background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;
+
+    /* Estilos da Tela de Login Moderna */
+    .login-page-bg {
+        background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
+        min-height: 70vh; display: flex; align-items: center; justify-content: center;
+        padding: 40px 20px; border-radius: 20px; margin: 20px 0;
     }
-    .login-container h1 { font-size: 18px !important; margin-bottom: 5px !important; }
-    .login-container p { font-size: 11px !important; margin-bottom: 10px !important; }
+    .login-card {
+        background: white; border-radius: 20px; padding: 40px 35px; max-width: 380px;
+        width: 100%; box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15); text-align: center;
+    }
+    .login-card img { width: 70px; height: auto; margin-bottom: 15px; }
+    .login-card h1 { color: #1e3a8a; font-size: 22px; font-weight: 700; margin: 0 0 5px 0; }
+    .login-card .subtitle { color: #64748b; font-size: 13px; margin: 0 0 25px 0; }
+    .login-card label { color: #1e3a8a; font-weight: 600; font-size: 13px; text-align: left; display: block; margin-bottom: 5px; }
+    .login-card input {
+        width: 100%; padding: 12px 15px; border: 2px solid #e2e8f0; border-radius: 10px;
+        font-size: 14px; margin-bottom: 15px; transition: all 0.2s; box-sizing: border-box;
+    }
+    .login-card input:focus { border-color: #1e3a8a; outline: none; box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
 </style>
 """, unsafe_allow_html=True)
 
@@ -155,7 +154,7 @@ if not st.session_state.usuario_logado:
         """, unsafe_allow_html=True)
         
         # --- IDEAL PARA ---
-        st.markdown('<h3 class="section-title"> Ideal para:</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="section-title">🎯 Ideal para:</h3>', unsafe_allow_html=True)
         col1, col2, col3 = st.columns(3, gap="large")
         with col1:
             st.markdown('<div class="card-ideal"><div class="icon">🏠</div><p>Corretores de Imóveis</p></div>', unsafe_allow_html=True)
@@ -165,7 +164,7 @@ if not st.session_state.usuario_logado:
             st.markdown('<div class="card-ideal"><div class="icon">🤝</div><p>Correspondentes e Autônomos</p></div>', unsafe_allow_html=True)
         
         # --- POR QUE ESCOLHER ---
-        st.markdown('<h3 class="section-title"> Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
+        st.markdown('<h3 class="section-title">🚀 Por que escolher a C&Q?</h3>', unsafe_allow_html=True)
         b1, b2, b3 = st.columns(3, gap="large")
         with b1:
             st.markdown('<div class="card-benefit"><div class="icon">📅</div><h4>Previsibilidade Total</h4><p>Saiba exatamente quanto vai receber no mês corrente e nos próximos meses.</p></div>', unsafe_allow_html=True)
@@ -182,122 +181,17 @@ if not st.session_state.usuario_logado:
         </div>
         """, unsafe_allow_html=True)
         
-        # --- BOTÕES (WhatsApp em HTML, Login em Streamlit nativo) ---
+        # --- BOTÕES ---
         col_btn1, col_btn2 = st.columns([1, 1], gap="large")
         with col_btn1:
             st.markdown('<a href="https://wa.me/5541999753534" target="_blank" style="text-decoration: none;"><div class="btn-whatsapp">📱 Chamar no WhatsApp</div></a>', unsafe_allow_html=True)
         with col_btn2:
-            # Botão nativo do Streamlit - 100% funcional
             if st.button("🔓 Já sou cliente? Fazer Login", key="btn_login_vitrine", use_container_width=True, type="primary"):
                 st.session_state.mostrar_login = True
                 st.rerun()
 
-        else:
+    else:
         # --- TELA DE LOGIN MODERNA ---
-        
-        # Fundo com gradiente suave
-        st.markdown("""
-        <style>
-            .login-page-bg {
-                background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #dbeafe 100%);
-                min-height: 80vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                padding: 40px 20px;
-                border-radius: 20px;
-                margin: 20px 0;
-            }
-            .login-card {
-                background: white;
-                border-radius: 20px;
-                padding: 40px 35px;
-                max-width: 380px;
-                width: 100%;
-                box-shadow: 0 20px 60px rgba(30, 58, 138, 0.15);
-                text-align: center;
-            }
-            .login-card img {
-                width: 70px;
-                height: auto;
-                margin-bottom: 15px;
-            }
-            .login-card h1 {
-                color: #1e3a8a;
-                font-size: 22px;
-                font-weight: 700;
-                margin: 0 0 5px 0;
-            }
-            .login-card .subtitle {
-                color: #64748b;
-                font-size: 13px;
-                margin: 0 0 25px 0;
-            }
-            .login-card label {
-                color: #1e3a8a;
-                font-weight: 600;
-                font-size: 13px;
-                text-align: left;
-                display: block;
-                margin-bottom: 5px;
-            }
-            .login-card input {
-                width: 100%;
-                padding: 12px 15px;
-                border: 2px solid #e2e8f0;
-                border-radius: 10px;
-                font-size: 14px;
-                margin-bottom: 15px;
-                transition: all 0.2s;
-                box-sizing: border-box;
-            }
-            .login-card input:focus {
-                border-color: #1e3a8a;
-                outline: none;
-                box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
-            }
-            .btn-entrar {
-                width: 100%;
-                padding: 14px;
-                background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-                color: white;
-                border: none;
-                border-radius: 10px;
-                font-size: 15px;
-                font-weight: 700;
-                cursor: pointer;
-                transition: all 0.2s;
-                box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
-                margin-top: 5px;
-            }
-            .btn-entrar:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
-            }
-            .link-criar {
-                display: block;
-                margin-top: 15px;
-                color: #3b82f6;
-                font-size: 13px;
-                text-decoration: none;
-                font-weight: 600;
-            }
-            .link-criar:hover {
-                text-decoration: underline;
-            }
-            .link-voltar {
-                display: inline-block;
-                margin-top: 20px;
-                color: #64748b;
-                font-size: 12px;
-                text-decoration: none;
-            }
-            .link-voltar:hover {
-                color: #1e3a8a;
-            }
-        </style>
-        """, unsafe_allow_html=True)
-        
         st.markdown(f"""
         <div class="login-page-bg">
             <div class="login-card">
@@ -311,10 +205,9 @@ if not st.session_state.usuario_logado:
             email = st.text_input("", placeholder="seu@email.com", key="login_email")
             st.markdown("<label>Senha</label>", unsafe_allow_html=True)
             senha = st.text_input("", type="password", placeholder="••••••••", key="login_senha")
-            
             botao_entrar = st.form_submit_button("Entrar no Sistema", use_container_width=True, type="primary")
         
-        st.markdown('<a href="#" class="link-criar">Não tem conta? Fale com Cesar no WhatsApp</a>', unsafe_allow_html=True)
+        st.markdown('</div></div>', unsafe_allow_html=True) # Fecha as divs do card e bg
         
         if botao_entrar:
             if email and senha:
@@ -334,7 +227,7 @@ if not st.session_state.usuario_logado:
 
     # ESTE STOP É CRUCIAL
     st.stop()
-    
+
 # ============================================================
 # APLICATIVO PRINCIPAL (logado)
 # ============================================================
@@ -366,7 +259,7 @@ st.sidebar.divider()
 st.sidebar.info("Sistema v1.0 - Multi-tenant ativo!")
 
 # Dashboard
-st.title(" Painel Executivo")
+st.title("📊 Painel Executivo")
 
 hoje = datetime.now()
 mes_atual = hoje.month
@@ -400,7 +293,7 @@ else:
     kpi1, kpi2, kpi3, kpi4, kpi5 = st.columns(5)
     kpi1.metric("💰 Total Geral", f"R$ {formatar_moeda(total_geral)}")
     kpi2.metric("✅ Recebido (Mês)", f"R$ {formatar_moeda(recebido_mes)}")
-    kpi3.metric(" Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
+    kpi3.metric("📂 Em Aberto", f"R$ {formatar_moeda(total_aberto)}")
     kpi4.metric("⚠️ Atrasado", f"R$ {formatar_moeda(total_atrasado)}")
     kpi5.metric("📊 Recebido (Ano)", f"R$ {formatar_moeda(recebido_ano)}")
     
